@@ -93,4 +93,8 @@ Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
 }
 
-export default connect(null, {setAlert})(Register);
+const mapActionToProps={
+    setAlert
+}
+
+export default connect(null, mapActionToProps)(Register);
