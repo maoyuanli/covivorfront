@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
-import {setAlert} from "../redux/action/alert-action";
+import {removeAlert, setAlert} from "../redux/action/alert-action";
 import PropTypes from 'prop-types'
 
 const Register = (props) => {
@@ -22,8 +22,10 @@ const Register = (props) => {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
+        let alertOn = false;
         if (pass1 !== pass2) {
             props.setAlert('passwords not matched', 'danger');
+            alertOn = true;
         } else {
             const newUser = {
                 username: email,
@@ -42,6 +44,9 @@ const Register = (props) => {
             } catch (e) {
                 console.log(e)
             }
+        }
+        if (alertOn) {
+            setTimeout(() => props.removeAlert('danger'), 5000)
         }
     };
 
@@ -91,10 +96,11 @@ const Register = (props) => {
 
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
+    removeAlert: PropTypes.func.isRequired
 }
 
-const mapActionToProps={
-    setAlert
+const mapActionToProps = {
+    setAlert, removeAlert
 }
 
 export default connect(null, mapActionToProps)(Register);
