@@ -22,10 +22,10 @@ const Register = (props) => {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
-        let alertOn = false;
+        let alertType = '';
         if (pass1 !== pass2) {
-            props.setAlert('passwords not matched', 'danger');
-            alertOn = true;
+            alertType = 'danger'
+            props.setAlert('passwords not matched', alertType);
         } else {
             const newUser = {
                 username: email,
@@ -40,13 +40,22 @@ const Register = (props) => {
                 }
                 const body = JSON.stringify(newUser);
                 const res = await axios.post('http://localhost:3000/api/user/register', body, config)
-                console.log(res.data)
+                if (res.status === 200) {
+                    alertType = 'success';
+                    props.setAlert(`Registration with ${email} succeeded`, alertType)
+                    setFormData({
+                        name: '',
+                        email: '',
+                        pass1: '',
+                        pass2: ''
+                    })
+                }
             } catch (e) {
                 console.log(e)
             }
         }
-        if (alertOn) {
-            setTimeout(() => props.removeAlert('danger'), 5000)
+        if (alertType.length !== 0) {
+            setTimeout(() => props.removeAlert(alertType), 5000)
         }
     };
 
