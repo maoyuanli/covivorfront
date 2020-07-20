@@ -1,10 +1,10 @@
-import {SET_ALERT} from "../action/action-constants";
+import {SET_ALERT} from "./action-constants";
 import cuid from 'cuid';
 
-export const setAlert = (msg, alertType) => dispatch => {
+export const setAlert = (msg, alertType) =>  {
     const id = cuid();
-    dispatch({
+    return {
         type: SET_ALERT,
         payload: {msg, alertType, id}
-    })
+    }
 };
