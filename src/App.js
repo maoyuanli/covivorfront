@@ -7,7 +7,6 @@ import Landing from "./components/landing";
 export const App = () => {
   return (
       <Fragment>
-
         <Navbar/>
         <Landing/>
       </Fragment>
