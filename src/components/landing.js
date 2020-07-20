@@ -8,7 +8,7 @@ const Landing = () => {
                 <div className="landing-inner">
                     <h1 className="x-large">COVID19 Survivors</h1>
                     <p className="lead">
-                        We fighted to survive, it's time to share experiences and move on together
+                        Share Experience, Help Each Other, Move On Together
                     </p>
                     <div className="buttons">
                         <Link to='/register' className="btn btn-primary">Sign Up</Link>
