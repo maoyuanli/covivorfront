@@ -19,7 +19,7 @@ const Navbar = (props) => {
     const guestLinks = (
         <ul>
             <li>
-                <Link to='/profiles'>Developers</Link>
+                <Link to='/survivors'>Survivors</Link>
             </li>
             <li>
                 <Link to='/register'>Register</Link>
