@@ -22,8 +22,8 @@ const Login = (props) => {
         props.loginAction(email, pass);
     };
 
-    if(props.isAuthenticated){
-        return <Redirect to='/dashboard' />
+    if (props.isAuthenticated) {
+        return <Redirect to='/dashboard'/>
     }
 
     return (
