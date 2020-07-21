@@ -1,5 +1,5 @@
 import axios from "axios";
-import {AUTH_ERROR, REGISTER_FAIL, REGISTER_SUCCESS, USER_LOADED} from "./action-constants";
+import {AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS, USER_LOADED} from "./action-constants";
 import {setAlert} from "./alert-action";
 import setAuthToken from "../../utils/set-auth-token";
 
@@ -20,7 +20,8 @@ export const registerAction = ({name, email, password}) => async dispatch => {
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
-        })
+        });
+        dispatch(loadUserAction());
     } catch (err) {
         const errors = err.response.data.errors;
 
@@ -53,5 +54,36 @@ export const loadUserAction = () => async dispatch => {
         dispatch({
             type: AUTH_ERROR
         })
+    }
+};
+
+export const loginAction = (email, password) => async dispatch => {
+    try {
+        const user = {
+            username: email,
+            password: password
+        }
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const body = JSON.stringify(user);
+        const res = await axios.post('http://localhost:3000/api/user/login', body, config)
+        dispatch({
+            type: LOGIN_SUCCESS,
+            payload: res.data
+        });
+        dispatch(loadUserAction());
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+
+        dispatch({
+            type: LOGIN_FAIL
+        });
     }
 };

@@ -1,12 +1,14 @@
 import React, {Fragment, useState} from 'react';
-import axios from 'axios';
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux';
+import {loginAction} from "../redux/action/auth-action";
+import PropTypes from "prop-types";
 
-const Login = () => {
+const Login = (props) => {
 
     const [formData, setFormData] = useState({
-        email: '',
-        pass: '',
+        email: 'user@abc.com',
+        pass: 'password',
     });
 
     const {email, pass} = formData;
@@ -17,18 +19,19 @@ const Login = () => {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-            const body = JSON.stringify({username: email, password: pass});
-            const res = await axios.post('http://localhost:3000/api/user/login', body, config)
-            console.log(res.data)
-        } catch (e) {
-            console.log(e)
-        }
+        props.loginAction(email, pass);
+        // try {
+        //     const config = {
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     }
+        //     const body = JSON.stringify({username: email, password: pass});
+        //     const res = await axios.post('http://localhost:3000/api/user/login', body, config)
+        //     console.log(res.data)
+        // } catch (e) {
+        //     console.log(e)
+        // }
 
     };
 
@@ -61,4 +64,12 @@ const Login = () => {
     );
 };
 
-export default Login;
+const mapActionToProps = {
+    loginAction
+}
+
+Login.propTypes = {
+    loginAction: PropTypes.func.isRequired
+}
+
+export default connect(null, mapActionToProps)(Login);
