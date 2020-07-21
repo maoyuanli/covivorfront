@@ -1,9 +1,9 @@
 import React, {Fragment, useState} from 'react';
-import axios from 'axios';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {removeAlert, setAlert} from "../redux/action/alert-action";
 import PropTypes from 'prop-types'
+import {registerAction} from "../redux/action/auth-action";
 
 const Register = (props) => {
 
@@ -27,32 +27,7 @@ const Register = (props) => {
             alertType = 'danger'
             props.setAlert('passwords not matched', alertType);
         } else {
-            const newUser = {
-                username: email,
-                fullname: name,
-                password: pass1
-            }
-            try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-                const body = JSON.stringify(newUser);
-                const res = await axios.post('http://localhost:3000/api/user/register', body, config)
-                if (res.status === 200) {
-                    alertType = 'success';
-                    props.setAlert(`Registration with ${email} succeeded`, alertType)
-                    setFormData({
-                        name: '',
-                        email: '',
-                        pass1: '',
-                        pass2: ''
-                    })
-                }
-            } catch (e) {
-                console.log(e)
-            }
+            props.registerAction({name, email, password: pass1})
         }
         if (alertType.length !== 0) {
             setTimeout(() => props.removeAlert(alertType), 5000)
@@ -105,11 +80,12 @@ const Register = (props) => {
 
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
-    removeAlert: PropTypes.func.isRequired
+    removeAlert: PropTypes.func.isRequired,
+    registerAction: PropTypes.func.isRequired,
 }
 
 const mapActionToProps = {
-    setAlert, removeAlert
+    setAlert, removeAlert, registerAction
 }
 
 export default connect(null, mapActionToProps)(Register);
