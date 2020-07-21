@@ -10,6 +10,8 @@ import store from './redux/store';
 import Alert from "./components/alert";
 import setAuthToken from "./utils/set-auth-token";
 import {loadUserAction} from "./redux/action/auth-action";
+import Dashboard from "./components/dashboard";
+import PrivateRoute from "./components/private-route";
 
 if (localStorage.token) {
     setAuthToken(localStorage.token)
@@ -30,6 +32,7 @@ export const App = () => {
                         <Switch>
                             <Route exact path='/register' component={Register}/>
                             <Route exact path='/login' component={Login}/>
+                            <PrivateRoute exact path='/dashboard' component={Dashboard}/>
                         </Switch>
                     </section>
                 </Fragment>

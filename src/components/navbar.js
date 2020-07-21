@@ -29,7 +29,6 @@ const Navbar = (props) => {
             </li>
         </ul>
     )
-    console.log(props)
 
     return (
         <nav className="navbar bg-dark">
