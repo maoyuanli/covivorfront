@@ -76,11 +76,10 @@ export const loginAction = (email, password) => async dispatch => {
         });
         dispatch(loadUserAction());
     } catch (err) {
-        const errors = err.response.data.errors;
 
-        if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-        }
+
+        dispatch(setAlert('user authentication failed', 'danger'));
+
 
         dispatch({
             type: LOGIN_FAIL

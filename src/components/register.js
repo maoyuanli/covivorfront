@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {connect} from 'react-redux';
 import {removeAlert, setAlert} from "../redux/action/alert-action";
 import PropTypes from 'prop-types'
@@ -33,6 +33,10 @@ const Register = (props) => {
             setTimeout(() => props.removeAlert(alertType), 5000)
         }
     };
+
+    if(props.isAuthenticated){
+        return <Redirect to='/dashboard' />
+    }
 
     return (
         <Fragment>
@@ -82,10 +86,15 @@ Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
     removeAlert: PropTypes.func.isRequired,
     registerAction: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
 }
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.authReducer.isAuthenticated
+});
 
 const mapActionToProps = {
     setAlert, removeAlert, registerAction
 }
 
-export default connect(null, mapActionToProps)(Register);
+export default connect(mapStateToProps, mapActionToProps)(Register);
