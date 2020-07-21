@@ -20,19 +20,6 @@ const Login = (props) => {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         props.loginAction(email, pass);
-        // try {
-        //     const config = {
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     }
-        //     const body = JSON.stringify({username: email, password: pass});
-        //     const res = await axios.post('http://localhost:3000/api/user/login', body, config)
-        //     console.log(res.data)
-        // } catch (e) {
-        //     console.log(e)
-        // }
-
     };
 
     return (
