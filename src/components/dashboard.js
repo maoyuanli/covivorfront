@@ -13,7 +13,7 @@ const Dashboard = props => {
 
     return (
         props.profile === null || props.profile.loading ?
-            <WaitLoader/> :
+            <Fragment><div className="ui active centered inline loader">loading</div></Fragment> :
             <Fragment>
                 <h1 className="large text-primary">
                     Dashboard
