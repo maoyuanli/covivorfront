@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {getProfileAction} from "../redux/action/profile-action";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types'
+import WaitLoader from "../utils/wait-loader";
 
 const Dashboard = props => {
     useEffect(() => {
@@ -9,9 +10,7 @@ const Dashboard = props => {
     }, [])
 
     return (
-        <div>
-            dashboard
-        </div>
+        props.profile === null || props.profile.loading ? <WaitLoader/> : <Fragment>Dashboard</Fragment>
     );
 };
 
