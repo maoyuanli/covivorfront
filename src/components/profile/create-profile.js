@@ -1,9 +1,9 @@
 import React, {Fragment, useState} from 'react';
 import {connect} from "react-redux";
-import {Button, Icon} from "semantic-ui-react";
+import {Icon} from "semantic-ui-react";
 import {upsertProfileAction} from "../../redux/action/profile-action";
 import PropTypes from 'prop-types';
-import {withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 const CreateProfile = props => {
     const [formData, setFormData] = useState({
@@ -80,7 +80,8 @@ const CreateProfile = props => {
                         <button type="button" className="ui primary button"
                                 onClick={() => toggleDisplaySocialInputs(!displaySocialInputs)}>
                             Add Social Network Links
-                        </button>{' '}
+                        </button>
+                        {' '}
                         <span>Optional</span>
                     </div>
                     <span>Optional</span>
@@ -125,7 +126,7 @@ const CreateProfile = props => {
 
 
                 <input type="submit" className="btn btn-primary my-1"/>
-                <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
+                <Link className="btn btn-light my-1" to='/dashboard'>Go Back</Link>
             </form>
         </Fragment>
     );

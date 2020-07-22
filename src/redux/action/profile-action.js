@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {GET_PROFILE, LOGIN_FAIL} from "./action-constants";
+import {GET_PROFILE} from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
 
 export const getProfileAction = () => async dispatch => {
@@ -16,7 +16,7 @@ export const getProfileAction = () => async dispatch => {
 };
 
 export const upsertProfileAction = (formData, history) => async dispatch => {
-    try{
+    try {
         const token = localStorage.getItem('token');
         const config = {
             headers: {
@@ -34,7 +34,7 @@ export const upsertProfileAction = (formData, history) => async dispatch => {
         history.push('/dashboard')
         setTimeout(() => dispatch(removeAlert('success')), 5000)
 
-    }catch (e) {
+    } catch (e) {
         console.log(e)
         dispatch(setAlert('profile update failed', 'danger'));
         setTimeout(() => dispatch(removeAlert('danger')), 5000)

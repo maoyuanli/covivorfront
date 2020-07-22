@@ -1,9 +1,10 @@
 import React, {Fragment, useEffect} from 'react';
-import {getProfileAction} from "../redux/action/profile-action";
+import {getProfileAction} from "../../redux/action/profile-action";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types'
 import {Button, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import DashboardLinks from "./dashboard-links";
 
 const Dashboard = props => {
     useEffect(() => {
@@ -21,7 +22,10 @@ const Dashboard = props => {
                 </h1>
                 <p className="lead"><Icon name='user'/> Welcome {props.auth.user && props.auth.user.fullname}</p>
                 {props.profile.profile !== null && props.profile.profile.profile.length !== 0 ?
-                    <Fragment>has </Fragment> :
+                    <Fragment>
+                        has
+                        <DashboardLinks/>
+                    </Fragment> :
                     <Fragment>
                         <Link to='/create-profile'>
                             <Button class="ui icon right labeled button" content="Create Profile"

@@ -10,7 +10,7 @@ import store from './redux/store';
 import Alert from "./components/alert";
 import setAuthToken from "./utils/set-auth-token";
 import {loadUserAction} from "./redux/action/auth-action";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard/dashboard";
 import PrivateRoute from "./components/private-route";
 import CreateProfile from "./components/profile/create-profile";
 
