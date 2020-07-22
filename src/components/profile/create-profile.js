@@ -1,6 +1,9 @@
 import React, {Fragment, useState} from 'react';
 import {connect} from "react-redux";
 import {Button, Icon} from "semantic-ui-react";
+import {upsertProfileAction} from "../../redux/action/profile-action";
+import PropTypes from 'prop-types';
+import {withRouter} from "react-router-dom";
 
 const CreateProfile = props => {
     const [formData, setFormData] = useState({
@@ -31,17 +34,24 @@ const CreateProfile = props => {
         setFormData({...formData, [e.target.name]: e.target.value})
     };
 
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        props.upsertProfileAction(formData, props.history);
+
+    };
+
+
     return (
         <Fragment>
             <h1 className="large text-primary">
-                Create Your Profile
+                Create/Update Your Profile
             </h1>
             <p className="lead">
                 <Icon name='user'/> Let's get some information to make your
                 profile stand out
             </p>
             <small>* = required field</small>
-            <form className="form">
+            <form className="form" onSubmit={handleOnSubmit}>
                 <div className="form-group">
                     <input type="text" placeholder="* Location" name="location" required
                            value={location} onChange={e => handleOnChange(e)}
@@ -66,11 +76,13 @@ const CreateProfile = props => {
                     >
                 </div>
                 <div className="my-2">
-                    <Button onClick={() => toggleDisplaySocialInputs(!displaySocialInputs)}
-                            class="primary button"
-                            content="Add Social Network Links"
-                            color='blue'
-                    />{' '}
+                    <div className="my-2">
+                        <button type="button" className="ui primary button"
+                                onClick={() => toggleDisplaySocialInputs(!displaySocialInputs)}>
+                            Add Social Network Links
+                        </button>{' '}
+                        <span>Optional</span>
+                    </div>
                     <span>Optional</span>
                 </div>
                 {displaySocialInputs &&
@@ -119,6 +131,13 @@ const CreateProfile = props => {
     );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+    upsertProfileAction: PropTypes.func.isRequired,
+};
 
-export default connect()(CreateProfile);
+const mapActionToProps = {
+    upsertProfileAction
+};
+
+
+export default connect(null, mapActionToProps)(withRouter(CreateProfile));
