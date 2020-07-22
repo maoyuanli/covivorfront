@@ -26,7 +26,7 @@ const Dashboard = props => {
                         <DashboardLinks/>
                     </Fragment> :
                     <Fragment>
-                        <Link to='/create-profile'>
+                        <Link to='/upsert-profile'>
                             <Button class="ui icon right labeled button" content="Create Profile"
                                     color="teal"
                             />

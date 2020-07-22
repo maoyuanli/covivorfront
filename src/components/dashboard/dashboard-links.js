@@ -6,7 +6,7 @@ const DashboardLinks = () => {
     return (
         <Fragment>
             <div className="dash-buttons">
-                <Link to="/create-profile" className="btn btn-light"
+                <Link to="/upsert-profile" className="ui primary button"
                 ><Icon className="edit"/> Edit Profile</Link
                 >
             </div>

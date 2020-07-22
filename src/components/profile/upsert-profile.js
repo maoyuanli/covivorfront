@@ -5,7 +5,7 @@ import {getProfileAction, upsertProfileAction} from "../../redux/action/profile-
 import PropTypes from 'prop-types';
 import {Link, withRouter} from "react-router-dom";
 
-const CreateProfile = props => {
+const UpsertProfile = props => {
     const [formData, setFormData] = useState({
         location: '',
         bio: '',
@@ -31,19 +31,18 @@ const CreateProfile = props => {
     const [displaySocialInputs, toggleDisplaySocialInputs] = useState(false)
 
 
-
     useEffect(() => {
         props.getProfileAction();
         const loadedProf = props.profile.profile !== null && props.profile.profile.profile.length !== 0 ? props.profile.profile.profile[0] : ''
         setFormData({
-            location:  loadedProf ? loadedProf.location :'',
-            bio :  loadedProf ? loadedProf.location :'',
-            hobby:  loadedProf ? loadedProf.hobby :'',
-            youtube:  loadedProf ? loadedProf.youtube :'',
-            twitter:  loadedProf ? loadedProf.twitter :'',
-            facebook:  loadedProf ? loadedProf.facebook :'',
-            linkedin:  loadedProf ? loadedProf.linkedin :'',
-            instagram :  loadedProf ? loadedProf.instagram :'',
+            location: loadedProf ? loadedProf.location : '',
+            bio: loadedProf ? loadedProf.location : '',
+            hobby: loadedProf ? loadedProf.hobby : '',
+            youtube: loadedProf ? loadedProf.youtube : '',
+            twitter: loadedProf ? loadedProf.twitter : '',
+            facebook: loadedProf ? loadedProf.facebook : '',
+            linkedin: loadedProf ? loadedProf.linkedin : '',
+            instagram: loadedProf ? loadedProf.instagram : '',
         })
     }, [props.profile.loading])
 
@@ -149,7 +148,7 @@ const CreateProfile = props => {
     );
 };
 
-CreateProfile.propTypes = {
+UpsertProfile.propTypes = {
     upsertProfileAction: PropTypes.func.isRequired,
 };
 
@@ -163,4 +162,4 @@ const mapActionToProps = {
 };
 
 
-export default connect(mapStateToProps, mapActionToProps)(withRouter(CreateProfile));
+export default connect(mapStateToProps, mapActionToProps)(withRouter(UpsertProfile));
