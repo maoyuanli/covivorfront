@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {connect} from "react-redux";
 import {Icon} from "semantic-ui-react";
-import {getProfileAction, upsertProfileAction} from "../../redux/action/profile-action";
+import {getProfileAction, upsertProfileAction} from "../redux/action/profile-action";
 import PropTypes from 'prop-types';
 import {Link, withRouter} from "react-router-dom";
 

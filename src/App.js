@@ -10,9 +10,9 @@ import store from './redux/store';
 import Alert from "./components/alert";
 import setAuthToken from "./utils/set-auth-token";
 import {loadUserAction} from "./redux/action/auth-action";
-import Dashboard from "./components/dashboard/dashboard";
+import Dashboard from "./components/dashboard";
 import PrivateRoute from "./components/private-route";
-import UpsertProfile from "./components/profile/upsert-profile";
+import UpsertProfile from "./components/upsert-profile";
 
 if (localStorage.token) {
     setAuthToken(localStorage.token)
