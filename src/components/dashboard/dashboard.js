@@ -23,7 +23,6 @@ const Dashboard = props => {
                 <p className="lead"><Icon name='user'/> Welcome {props.auth.user && props.auth.user.fullname}</p>
                 {props.profile.profile !== null && props.profile.profile.profile.length !== 0 ?
                     <Fragment>
-                        has
                         <DashboardLinks/>
                     </Fragment> :
                     <Fragment>
