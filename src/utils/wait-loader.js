@@ -10,8 +10,7 @@ class WaitLoader extends Component {
         const override = css`
                         display: block;
                         margin: 0 auto;
-                        border-color: red;
-                     
+                        border-color: red;         
                         `;
 
 

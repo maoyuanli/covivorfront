@@ -3,6 +3,8 @@ import {getProfileAction} from "../redux/action/profile-action";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types'
 import WaitLoader from "../utils/wait-loader";
+import {Button, Icon} from "semantic-ui-react";
+import {Link} from "react-router-dom";
 
 const Dashboard = props => {
     useEffect(() => {
@@ -10,7 +12,23 @@ const Dashboard = props => {
     }, [])
 
     return (
-        props.profile === null || props.profile.loading ? <WaitLoader/> : <Fragment>Dashboard</Fragment>
+        props.profile === null || props.profile.loading ?
+            <WaitLoader/> :
+            <Fragment>
+                <h1 className="large text-primary">
+                    Dashboard
+                </h1>
+                <p className="lead"><Icon name='user'/> Welcome {props.auth.user && props.auth.user.fullname}</p>
+                {props.profile.profile !== null && props.profile.profile.profile.length !== 0 ?
+                    <Fragment>has </Fragment> :
+                    <Fragment>
+                        <Link to='/create-profile'>
+                            <Button class="ui icon right labeled button" content="Create Profile"
+                                    color="teal"
+                            />
+                        </Link>
+                    </Fragment>}
+            </Fragment>
     );
 };
 

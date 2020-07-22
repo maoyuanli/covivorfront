@@ -2,25 +2,25 @@ import React, {Fragment} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {logoutAction} from "../redux/action/auth-action";
+import {Icon} from "semantic-ui-react";
 
 
 const Navbar = (props) => {
     const authLinks = (
-        <ul>
+        <ul style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
             <li>
-                <Link to='/dashboard'><i className='fas fa-user'/>{' '}Dashboard</Link>
+                <Link to='/dashboard'>{' '}Dashboard</Link>
             </li>
             <li>
                 <a onClick={props.logoutAction} href='/'>
-                    <i className='fas fa-sign-out-alt'/>{' '}
-                    <span className='hide-sm'>Logout</span>
+                    <Icon name='log out'/>Logout
                 </a>
             </li>
         </ul>
     )
 
     const guestLinks = (
-        <ul>
+        <ul style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
             <li>
                 <Link to='/survivors'>Survivors</Link>
             </li>
