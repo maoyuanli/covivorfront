@@ -8,6 +8,9 @@ const Navbar = (props) => {
     const authLinks = (
         <ul>
             <li>
+                <Link to='/dashboard'><i className='fas fa-user'/>{' '}Dashboard</Link>
+            </li>
+            <li>
                 <a onClick={props.logoutAction} href='/'>
                     <i className='fas fa-sign-out-alt'/>{' '}
                     <span className='hide-sm'>Logout</span>
