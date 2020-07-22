@@ -2,7 +2,6 @@ import React, {Fragment, useEffect} from 'react';
 import {getProfileAction} from "../redux/action/profile-action";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types'
-import WaitLoader from "../utils/wait-loader";
 import {Button, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
@@ -13,7 +12,9 @@ const Dashboard = props => {
 
     return (
         props.profile === null || props.profile.loading ?
-            <Fragment><div className="ui active centered inline loader">loading</div></Fragment> :
+            <Fragment>
+                <div className="ui active centered inline loader">loading</div>
+            </Fragment> :
             <Fragment>
                 <h1 className="large text-primary">
                     Dashboard

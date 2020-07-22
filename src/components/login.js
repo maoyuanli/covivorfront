@@ -3,6 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import {connect} from 'react-redux';
 import {loginAction} from "../redux/action/auth-action";
 import PropTypes from "prop-types";
+import {Icon} from "semantic-ui-react";
 
 const Login = (props) => {
 
@@ -29,7 +30,7 @@ const Login = (props) => {
     return (
         <Fragment>
             <h1 className="large text-primary">Sign In</h1>
-            <p className="lead"><i className="fas fa-user"></i> Log into your account</p>
+            <p className="lead"><Icon name='user'/> Log into your account</p>
             <form className="form" onSubmit={handleOnSubmit}>
                 <div className="form-group">
                     <input type="email" placeholder="Email Address" name="email"

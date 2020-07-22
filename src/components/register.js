@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {removeAlert, setAlert} from "../redux/action/alert-action";
 import PropTypes from 'prop-types'
 import {registerAction} from "../redux/action/auth-action";
+import {Icon} from "semantic-ui-react";
 
 const Register = (props) => {
 
@@ -41,7 +42,7 @@ const Register = (props) => {
     return (
         <Fragment>
             <h1 className="large text-primary">Sign Up</h1>
-            <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
+            <p className="lead"><Icon name='user'/> Create Your Account</p>
             <form className="form" onSubmit={handleOnSubmit}>
                 <div className="form-group">
                     <input type="text" placeholder="Name" name="name" required

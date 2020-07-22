@@ -8,7 +8,7 @@ import {
     REGISTER_SUCCESS,
     USER_LOADED
 } from "./action-constants";
-import {setAlert} from "./alert-action";
+import {removeAlert, setAlert} from "./alert-action";
 import setAuthToken from "../../utils/set-auth-token";
 
 export const registerAction = ({name, email, password}) => async dispatch => {
@@ -88,6 +88,7 @@ export const loginAction = (email, password) => async dispatch => {
         dispatch({
             type: LOGIN_FAIL
         });
+        setTimeout(() => dispatch(removeAlert('danger')), 5000)
     }
 };
 
