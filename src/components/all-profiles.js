@@ -25,12 +25,11 @@ const AllProfiles = props => {
                         {props.profile.profiles.length > 0 ?
                             (
                                 props.profile.profiles.map(p => {
-                                    console.log(p);
-                                    return <ProfileItem key={p._id} profile={p}/>
-                                }
-                        )
-                        ) :
-                        <h3>No Profiles Found</h3>}
+                                        return <ProfileItem key={p._id} profile={p}/>
+                                    }
+                                )
+                            ) :
+                            <h3>No Profiles Found</h3>}
                     </ItemGroup>
                 </Fragment>}
         </Fragment>

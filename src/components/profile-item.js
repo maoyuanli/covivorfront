@@ -1,39 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Icon, Image, Item} from "semantic-ui-react";
+import {Button, Icon, Item, Message} from "semantic-ui-react";
 
 const ProfileItem = ({
                          profile: {
-                             user: {_id, fullname}, facebook, hobby, instagram, linkedin, location, twitter, youtube,bio
+                             user: {_id, fullname}, facebook, hobby, instagram, linkedin, location, twitter, youtube, bio
                          }
                      }) => {
+
+    const randInt = Math.floor(Math.random() * 100);
+    const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
     return (
         <Item>
-            <Item.Image size='tiny' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+            <Item.Image size='tiny' src={hostPhotoURL}/>
 
             <Item.Content>
                 <Item.Header as='a'>{fullname}</Item.Header>
-                <Item.Meta> <div>
-                    <Button color='facebook'>
-                        <Icon name='facebook' /> Facebook
-                    </Button>
-                    <Button color='twitter'>
-                        <Icon name='twitter' /> Twitter
-                    </Button>
-                    <Button color='linkedin'>
-                        <Icon name='linkedin' /> LinkedIn
-                    </Button>
-                    <Button color='instagram'>
-                        <Icon name='instagram' /> Instagram
-                    </Button>
-                    <Button color='youtube'>
-                        <Icon name='youtube' /> YouTube
-                    </Button>
-                </div></Item.Meta>
-                <Item.Description>
-                    {bio}
-                </Item.Description>
-                <Item.Extra>{hobby}</Item.Extra>
+                <Message
+                    info
+                    header={bio}
+                    content={hobby}
+                />
+                <Item.Meta>
+                    <div>
+                        {facebook && (<Button color='facebook'>
+                            <Icon name='facebook'/> {facebook}
+                        </Button>)}
+                        {twitter && (<Button color='twitter'>
+                            <Icon name='twitter'/> {twitter}
+                        </Button>)}
+                        {instagram && (<Button color='instagram'>
+                            <Icon name='instagram'/> {instagram}
+                        </Button>)}
+                        {linkedin && (<Button color='linkedin'>
+                            <Icon name='linkedin'/> {linkedin}
+                        </Button>)}
+                        {youtube && (<Button color='youtube'>
+                            <Icon name='youtube'/> {youtube}
+                        </Button>)}
+                    </div>
+                </Item.Meta>
+                <Item.Extra><Icon className='map marker'/>{location}</Item.Extra>
             </Item.Content>
         </Item>
     );
