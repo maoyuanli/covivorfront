@@ -26,7 +26,7 @@ const AllProfiles = props => {
                             (
                                 props.profile.profiles.map(p => {
                                     console.log(p);
-                                    return <ProfileItem key={p._id}/>
+                                    return <ProfileItem key={p._id} profile={p}/>
                                 }
                         )
                         ) :
