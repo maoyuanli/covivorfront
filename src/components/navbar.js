@@ -7,10 +7,7 @@ import {Icon} from "semantic-ui-react";
 
 const Navbar = (props) => {
     const authLinks = (
-        <ul style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <li>
-                <Link to='/allprofiles'>Survivors</Link>
-            </li>
+        <Fragment style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
             <li>
                 <Link to='/dashboard'>{' '}Dashboard</Link>
             </li>
@@ -19,21 +16,18 @@ const Navbar = (props) => {
                     <Icon name='log out'/>Logout
                 </a>
             </li>
-        </ul>
+        </Fragment>
     )
 
     const guestLinks = (
-        <ul style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <li>
-                <Link to='/allprofiles'>Survivors</Link>
-            </li>
+        <Fragment>
             <li>
                 <Link to='/register'>Register</Link>
             </li>
             <li>
                 <Link to='/login'>Login</Link>
             </li>
-        </ul>
+        </Fragment>
     )
 
     return (
@@ -41,11 +35,20 @@ const Navbar = (props) => {
             <h1>
                 <Link to='/'><Icon className="users"/> CoVivor</Link>
             </h1>
-            {!props.auth.loading && (
-                <Fragment>
-                    {props.auth.isAuthenticated ? authLinks : guestLinks}
-                </Fragment>
-            )}
+            <ul style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <li>
+                    <Link to='/allprofiles'>Survivors</Link>
+                </li>
+                <li>
+                    <Link to='/allposts'>Discussions</Link>
+                </li>
+                {!props.auth.loading && (
+                    <Fragment>
+                        {props.auth.isAuthenticated ? authLinks : guestLinks}
+                    </Fragment>
+                )}
+            </ul>
+
         </nav>
     );
 };

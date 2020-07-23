@@ -4,13 +4,13 @@ import {connect} from "react-redux";
 import {getAllPostsAction} from "../redux/action/post-action";
 
 const AllPosts = props => {
-    useEffect(()=>{
+    useEffect(() => {
         props.getAllPostsAction();
-    },[props.getAllPostsAction])
+    }, [props.getAllPostsAction])
 
     return (
         <Fragment>
-
+            all posts
         </Fragment>
     );
 };
