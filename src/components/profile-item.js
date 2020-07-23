@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Button, Icon, Item, Message} from "semantic-ui-react";
+import {Link} from "react-router-dom";
 
 const ProfileItem = ({
                          profile: {
-                             user: {_id, fullname}, facebook, instagram, linkedin, location, twitter, youtube, bio
+                             user: {fullname}, facebook, instagram, linkedin, location, twitter, youtube, bio, _id
                          }
                      }) => {
 
@@ -15,7 +16,7 @@ const ProfileItem = ({
             <Item.Image size='tiny' src={hostPhotoURL}/>
 
             <Item.Content>
-                <Item.Header as='a'>{fullname}</Item.Header>
+                <Item.Header as={Link} to={{pathname: '/profile', profileProps: {id: _id}}}>{fullname}</Item.Header>
                 <Message
                     info
                     header={bio}
