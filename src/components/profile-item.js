@@ -4,7 +4,7 @@ import {Button, Icon, Item, Message} from "semantic-ui-react";
 
 const ProfileItem = ({
                          profile: {
-                             user: {_id, fullname}, facebook, hobby, instagram, linkedin, location, twitter, youtube, bio
+                             user: {_id, fullname}, facebook, instagram, linkedin, location, twitter, youtube, bio
                          }
                      }) => {
 
@@ -19,7 +19,6 @@ const ProfileItem = ({
                 <Message
                     info
                     header={bio}
-                    content={hobby}
                 />
                 <Item.Meta>
                     <div>

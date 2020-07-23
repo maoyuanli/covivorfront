@@ -9,7 +9,6 @@ const UpsertProfile = props => {
     const [formData, setFormData] = useState({
         location: '',
         bio: '',
-        hobby: '',
         youtube: '',
         twitter: '',
         facebook: '',
@@ -20,7 +19,6 @@ const UpsertProfile = props => {
     const {
         location,
         bio,
-        hobby,
         youtube,
         twitter,
         facebook,
@@ -36,8 +34,7 @@ const UpsertProfile = props => {
         const loadedProf = props.profile.profile !== null && props.profile.profile.profile.length !== 0 ? props.profile.profile.profile[0] : ''
         setFormData({
             location: loadedProf ? loadedProf.location : '',
-            bio: loadedProf ? loadedProf.location : '',
-            hobby: loadedProf ? loadedProf.hobby : '',
+            bio: loadedProf ? loadedProf.bio : '',
             youtube: loadedProf ? loadedProf.youtube : '',
             twitter: loadedProf ? loadedProf.twitter : '',
             facebook: loadedProf ? loadedProf.facebook : '',
@@ -81,15 +78,6 @@ const UpsertProfile = props => {
                               value={bio} onChange={e => handleOnChange(e)}
                     />
                     <small className="form-text">Tell us a little about yourself</small>
-                </div>
-                <div className="form-group">
-                    <input type="text" placeholder="Hobby" name="hobby"
-                           value={hobby} onChange={e => handleOnChange(e)}
-                    />
-                    <small className="form-text"
-                    >Please use comma separated values (eg.
-                        movie,outdoors,swimming,photography)</small
-                    >
                 </div>
                 <div className="my-2">
                     <div className="my-2">
