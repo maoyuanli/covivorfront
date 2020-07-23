@@ -15,7 +15,7 @@ import PrivateRoute from "./components/private-route";
 import UpsertProfile from "./components/profile/upsert-profile";
 import AllProfiles from "./components/profile/all-profiles";
 import Profile from "./components/profile/profile";
-import AllPosts from "./components/all-posts";
+import AllPosts from "./components/post/all-posts";
 
 if (localStorage.token) {
     setAuthToken(localStorage.token)
