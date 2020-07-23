@@ -2,18 +2,20 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 const PostItem = props => {
+    const randInt = Math.floor(Math.random() * 100);
+    const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`
     return (
         <Fragment>
 
             <div className="post bg-white p-1 my-1">
                 <div>
-                    <a href="profile.html">
+                    <a>
                         <img
                             className="round-img"
-                            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+                            src={hostPhotoURL}
                             alt=""
                         />
-                        <h4>John Doe</h4>
+                        <h4>{props.post.user.fullname}</h4>
                     </a>
                 </div>
                 <div>

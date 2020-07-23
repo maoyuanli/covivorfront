@@ -19,7 +19,7 @@ const AllPosts = props => {
                     </h1>
                     <p className="lead"><Icon className="user"/> Welcome to the community!</p>
 
-                    <div className="post-form">
+                    {props.auth.isAuthenticated && ( <div className="post-form">
                         <div className="bg-primary p">
                             <h3>Say Something...</h3>
                         </div>
@@ -33,7 +33,7 @@ const AllPosts = props => {
                               />
                             <input type="submit" className="btn btn-dark my-1" value="Submit"/>
                         </form>
-                    </div>
+                    </div>)}
 
                     <div>
                         {props.post.posts.map(p=>(
@@ -52,7 +52,8 @@ AllPosts.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    post: state.postReducer
+    post: state.postReducer,
+    auth: state.authReducer
 });
 
 const mapActionToProps = {

@@ -7,7 +7,7 @@ import {Icon} from "semantic-ui-react";
 
 const Navbar = (props) => {
     const authLinks = (
-        <Fragment style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <Fragment>
             <li>
                 <Link to='/dashboard'>{' '}Dashboard</Link>
             </li>
@@ -31,7 +31,7 @@ const Navbar = (props) => {
     )
 
     return (
-        <nav className="navbar bg-dark">
+        <nav className="navbar bg-dark" style={{fontSize: "large", display: "flex"}}>
             <h1>
                 <Link to='/'><Icon className="users"/> CoVivor</Link>
             </h1>
