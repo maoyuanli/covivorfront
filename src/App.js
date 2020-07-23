@@ -3,8 +3,8 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Navbar from "./components/navbar";
 import Landing from "./components/landing";
-import Register from "./components/register";
-import Login from "./components/login";
+import Register from "./components/auth/register";
+import Login from "./components/auth/login";
 import {Provider} from 'react-redux';
 import store from './redux/store';
 import Alert from "./components/alert";
@@ -12,9 +12,9 @@ import setAuthToken from "./utils/set-auth-token";
 import {loadUserAction} from "./redux/action/auth-action";
 import Dashboard from "./components/dashboard";
 import PrivateRoute from "./components/private-route";
-import UpsertProfile from "./components/upsert-profile";
-import AllProfiles from "./components/all-profiles";
-import Profile from "./components/profile";
+import UpsertProfile from "./components/profile/upsert-profile";
+import AllProfiles from "./components/profile/all-profiles";
+import Profile from "./components/profile/profile";
 
 if (localStorage.token) {
     setAuthToken(localStorage.token)

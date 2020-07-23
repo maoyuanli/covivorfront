@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {Link, Redirect} from "react-router-dom";
 import {connect} from 'react-redux';
-import {loginAction} from "../redux/action/auth-action";
+import {loginAction} from "../../redux/action/auth-action";
 import PropTypes from "prop-types";
 import {Icon} from "semantic-ui-react";
 

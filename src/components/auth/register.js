@@ -1,9 +1,9 @@
 import React, {Fragment, useState} from 'react';
 import {Link, Redirect} from "react-router-dom";
 import {connect} from 'react-redux';
-import {removeAlert, setAlert} from "../redux/action/alert-action";
+import {removeAlert, setAlert} from "../../redux/action/alert-action";
 import PropTypes from 'prop-types'
-import {registerAction} from "../redux/action/auth-action";
+import {registerAction} from "../../redux/action/auth-action";
 import {Icon} from "semantic-ui-react";
 
 const Register = (props) => {

@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {getAllProfilesAction} from "../redux/action/profile-action";
+import {getAllProfilesAction} from "../../redux/action/profile-action";
 import {Icon, ItemGroup} from "semantic-ui-react";
 import ProfileItem from "./profile-item";
 
