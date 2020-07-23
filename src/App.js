@@ -15,6 +15,7 @@ import PrivateRoute from "./components/private-route";
 import UpsertProfile from "./components/profile/upsert-profile";
 import AllProfiles from "./components/profile/all-profiles";
 import Profile from "./components/profile/profile";
+import AllPosts from "./components/all-posts";
 
 if (localStorage.token) {
     setAuthToken(localStorage.token)
@@ -37,6 +38,7 @@ export const App = () => {
                             <Route exact path='/login' component={Login}/>
                             <Route exact path='/allprofiles' component={AllProfiles}/>
                             <Route exact path='/profile/' component={Profile}/>
+                            <Route exact path='/allposts' component={AllPosts}/>
                             <PrivateRoute exact path='/dashboard' component={Dashboard}/>
                             <PrivateRoute exact path='/upsert-profile' component={UpsertProfile}/>
                         </Switch>
