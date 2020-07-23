@@ -2,7 +2,8 @@ import React, {Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {getAllProfilesAction} from "../redux/action/profile-action";
-import {Header, Icon} from "semantic-ui-react";
+import {Icon} from "semantic-ui-react";
+import ProfileItem from "./profile-item";
 
 const AllProfiles = props => {
 
@@ -21,13 +22,15 @@ const AllProfiles = props => {
                         <Icon className="handshake outline"/> Browse and connect with survivors
                     </p>
                     <div>
-                        {props.profile.profiles.length>0 ?
+                        {props.profile.profiles.length > 0 ?
                             (
-                                props.profile.profiles.map(p=>(
-                                    console.log(p)
-                                ))
-                            ):
-                            <h3>No Profiles Found</h3>}
+                                props.profile.profiles.map(p => {
+                                    console.log(p);
+                                    return <ProfileItem key={p._id}/>
+                                }
+                        )
+                        ) :
+                        <h3>No Profiles Found</h3>}
                     </div>
                 </Fragment>}
         </Fragment>
