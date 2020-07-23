@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {GET_PROFILE} from "./action-constants";
+import {GET_ALL_PROFILES, GET_PROFILE} from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
 
 export const getProfileAction = () => async dispatch => {
@@ -11,6 +11,19 @@ export const getProfileAction = () => async dispatch => {
         })
     } catch (e) {
         dispatch(setAlert('profile loading failed', 'danger'));
+        setTimeout(() => dispatch(removeAlert('danger')), 5000)
+    }
+};
+
+export const getAllProfilesAction = () => async dispatch => {
+    try {
+        const res = await axios.get('http://localhost:3000/api/profile/getall');
+        dispatch({
+            type: GET_ALL_PROFILES,
+            payload: res.data.profiles
+        })
+    } catch (e) {
+        dispatch(setAlert('profiles loading failed', 'danger'));
         setTimeout(() => dispatch(removeAlert('danger')), 5000)
     }
 };
@@ -30,7 +43,7 @@ export const upsertProfileAction = (formData, history) => async dispatch => {
             type: GET_PROFILE,
             payload: res.data
         })
-        dispatch(setAlert('profile UPDATED', 'success'));
+        dispatch(setAlert('profile updated', 'success'));
         history.push('/dashboard')
         setTimeout(() => dispatch(removeAlert('success')), 5000)
 

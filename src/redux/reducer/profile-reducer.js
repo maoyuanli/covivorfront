@@ -1,5 +1,4 @@
-import React from 'react';
-import {GET_PROFILE} from "../action/action-constants";
+import {GET_ALL_PROFILES, GET_PROFILE} from "../action/action-constants";
 
 const initState = {
     profile: null,
@@ -13,6 +12,8 @@ const profileReducer = (state = initState, action) => {
     switch (type) {
         case GET_PROFILE:
             return {...state, profile: payload, loading: false}
+        case GET_ALL_PROFILES:
+            return {...state, profiles: payload, loading: false}
         default:
             return state
     }

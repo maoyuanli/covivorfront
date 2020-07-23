@@ -9,6 +9,9 @@ const Navbar = (props) => {
     const authLinks = (
         <ul style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
             <li>
+                <Link to='/allprofiles'>Survivors</Link>
+            </li>
+            <li>
                 <Link to='/dashboard'>{' '}Dashboard</Link>
             </li>
             <li>
@@ -22,7 +25,7 @@ const Navbar = (props) => {
     const guestLinks = (
         <ul style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
             <li>
-                <Link to='/survivors'>Survivors</Link>
+                <Link to='/allprofiles'>Survivors</Link>
             </li>
             <li>
                 <Link to='/register'>Register</Link>
@@ -36,7 +39,7 @@ const Navbar = (props) => {
     return (
         <nav className="navbar bg-dark">
             <h1>
-                <Link to='/'><i className="fas fa-code"></i>CoVivor</Link>
+                <Link to='/'><Icon className="users"/> CoVivor</Link>
             </h1>
             {!props.auth.loading && (
                 <Fragment>

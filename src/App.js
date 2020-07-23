@@ -13,6 +13,7 @@ import {loadUserAction} from "./redux/action/auth-action";
 import Dashboard from "./components/dashboard";
 import PrivateRoute from "./components/private-route";
 import UpsertProfile from "./components/upsert-profile";
+import AllProfiles from "./components/all-profiles";
 
 if (localStorage.token) {
     setAuthToken(localStorage.token)
@@ -33,6 +34,7 @@ export const App = () => {
                         <Switch>
                             <Route exact path='/register' component={Register}/>
                             <Route exact path='/login' component={Login}/>
+                            <Route exact path='/allprofiles' component={AllProfiles}/>
                             <PrivateRoute exact path='/dashboard' component={Dashboard}/>
                             <PrivateRoute exact path='/upsert-profile' component={UpsertProfile}/>
                         </Switch>
