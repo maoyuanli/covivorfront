@@ -55,6 +55,18 @@ export const createPostAction = (postText) => async dispatch => {
             payload: res.data.posts
         })
     } catch (e) {
+        console.log(e)
+    }
+};
 
+export const deletePostAction = (postId) => async dispatch => {
+    try {
+        const res = await axios.delete(`http://localhost:3000/api/post/delete/${postId}`, setRequestConfig())
+        dispatch({
+            type: GET_ALL_POSTS,
+            payload: res.data.posts
+        })
+    } catch (e) {
+        console.log(e)
     }
 };

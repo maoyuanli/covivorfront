@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Icon, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
-import {getAllPostsAction, likePostAction, unLikePostAction} from "../../redux/action/post-action";
+import {deletePostAction, getAllPostsAction, likePostAction, unLikePostAction} from "../../redux/action/post-action";
 
 const PostItem = props => {
 
@@ -20,6 +20,11 @@ const PostItem = props => {
         } else {
             props.unLikePostAction(curPostId);
         }
+    };
+
+    const handleDeletePost = (e) => {
+        e.preventDefault();
+        props.deletePostAction(curPostId);
     };
 
     return (
@@ -61,7 +66,8 @@ const PostItem = props => {
                             28
                         </Label>
                     </Button>
-                    {curUserId === curPost.user._id && (<Button color='brown'>Delete</Button>)}
+                    {curUserId === curPost.user._id &&
+                    (<Button onClick={handleDeletePost} color='brown'>Delete</Button>)}
                 </div>
             </div>
         </Fragment>
@@ -84,7 +90,8 @@ const mapStateToProps = (state) => ({
 const mapActionToProps = {
     likePostAction,
     unLikePostAction,
-    getAllPostsAction
+    getAllPostsAction,
+    deletePostAction
 }
 
 export default connect(mapStateToProps, mapActionToProps)(PostItem);

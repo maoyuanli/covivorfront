@@ -19,11 +19,6 @@ const postReducer = (state = initState, action) => {
                     {...p, likes: payload.likes} : p),
                 loading: false
             };
-        // case CREATE_POST:
-        //     return {
-        //         ...state,
-        //
-        //     }
         default:
             return state
     }
