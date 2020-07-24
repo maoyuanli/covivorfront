@@ -1,12 +1,16 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
+import {Button, Icon, Label} from "semantic-ui-react";
+import {connect} from "react-redux";
 
 const PostItem = props => {
     const randInt = Math.floor(Math.random() * 100);
-    const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`
+    const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
+    const usersLiked = props.post.likes.map(like=>like.user);
+    const curUserId = props.auth.user ? props.auth.user._id : 0
+    const alreadyLiked = usersLiked.includes(curUserId);
     return (
         <Fragment>
-
             <div className="post bg-white p-1 my-1">
                 <div>
                     <a>
@@ -25,22 +29,24 @@ const PostItem = props => {
                     <p className="post-date">
                         Posted on 04/16/2019
                     </p>
-                    <button type="button" className="btn btn-light">
-                        <i className="fas fa-thumbs-up"></i>
-                        <span>4</span>
-                    </button>
-                    <button type="button" className="btn btn-light">
-                        <i className="fas fa-thumbs-down"></i>
-                    </button>
-                    <a href="post.html" className="btn btn-primary">
-                        Discussion <span className='comment-count'>2</span>
-                    </a>
-                    <button
-                        type="button"
-                        className="btn btn-danger"
-                    >
-                        <i className="fas fa-times"></i>
-                    </button>
+                    <Button as='div' labelPosition='right'>
+                        <Button basic={!alreadyLiked} color='red'>
+                            <Icon name='heart' />
+                            Like
+                        </Button>
+                        <Label as='a' basic color='red' pointing='left'>
+                            {props.post.likes.length }
+                        </Label>
+                    </Button>
+                    <Button as='div' labelPosition='right'>
+                        <Button basic color='blue'>
+                            <Icon name='fork' />
+                            Discussion
+                        </Button>
+                        <Label as='a' basic color='blue' pointing='left'>
+                            28
+                        </Label>
+                    </Button>
                 </div>
             </div>
         </Fragment>
@@ -48,7 +54,15 @@ const PostItem = props => {
 };
 
 PostItem.propTypes = {
-
+    auth: PropTypes.object.isRequired
 };
 
-export default PostItem;
+const mapStateToProps = (state) => ({
+    auth: state.authReducer
+});
+
+const mapActionToProps = {
+
+}
+
+export default connect(mapStateToProps, mapActionToProps)(PostItem);
