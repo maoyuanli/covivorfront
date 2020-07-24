@@ -61,6 +61,7 @@ const PostItem = props => {
                             28
                         </Label>
                     </Button>
+                    {curUserId === curPost.user._id && (<Button color='brown'>Delete</Button>)}
                 </div>
             </div>
         </Fragment>
