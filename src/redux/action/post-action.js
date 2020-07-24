@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_ALL_POSTS, GET_PROFILE} from "./action-constants";
+import {GET_ALL_POSTS, UPDATE_LIKES} from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
 
 export const getAllPostsAction = () => async dispatch => {
@@ -25,9 +25,32 @@ export const likePostAction = (postId) => async dispatch => {
             }
         }
         const body = JSON.stringify({postId: postId});
-        await axios.put('http://localhost:3000/api/post/like', body, config)
+        const res = await axios.put('http://localhost:3000/api/post/like', body, config)
+        dispatch({
+            type: UPDATE_LIKES,
+            payload: {postId, likes: res.data.likes}
+        })
     } catch (e) {
         console.log(e)
     }
 };
 
+export const unLikePostAction = (postId) => async dispatch => {
+    try {
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        }
+        const body = JSON.stringify({postId: postId});
+        const res = await axios.put('http://localhost:3000/api/post/unlike', body, config)
+        dispatch({
+            type: UPDATE_LIKES,
+            payload: {postId, likes: res.data.likes}
+        })
+    } catch (e) {
+        console.log(e)
+    }
+};

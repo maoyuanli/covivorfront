@@ -19,7 +19,7 @@ const AllPosts = props => {
                     </h1>
                     <p className="lead"><Icon className="user"/> Welcome to the community!</p>
 
-                    {props.auth.isAuthenticated && ( <div className="post-form">
+                    {props.auth.isAuthenticated && (<div className="post-form">
                         <div className="bg-primary p">
                             <h3>Say Something...</h3>
                         </div>
@@ -36,8 +36,8 @@ const AllPosts = props => {
                     </div>)}
 
                     <div>
-                        {props.post.posts.map(p=>(
-                            <PostItem key={p._id} postId={p._id} />
+                        {props.post.posts.map(p => (
+                            <PostItem key={p._id} postPassed={p}/>
                         ))}
                     </div>
                 </Fragment>

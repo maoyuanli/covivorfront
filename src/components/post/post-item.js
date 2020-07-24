@@ -1,32 +1,25 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Icon, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
-import {getAllPostsAction, likePostAction} from "../../redux/action/post-action";
+import {getAllPostsAction, likePostAction, unLikePostAction} from "../../redux/action/post-action";
 
 const PostItem = props => {
-    useEffect(() => {
-        props.getAllPostsAction();
-    }, [props.post.loading])
 
     const randInt = Math.floor(Math.random() * 100);
     const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
 
-    const curPostId = props.postId;
-    // const curPost = props.post.posts.filter(p => p._id === curPostId)[0];
+    const curPost = props.postPassed;
+    const curPostId = props.postPassed._id;
     const curUserId = props.auth.user ? props.auth.user._id : 0
 
 
-    const [postState, setPostState] = useState({
-        curPost: props.post.posts.filter(p => p._id === curPostId)[0]
-    });
-
-    const {curPost} = postState;
-
     const handleLikePost = () => {
-        props.likePostAction(curPostId);
-
-        props.post.loading = !props.post.loading;
+        if (!curPost.likes.map(like => like.user).includes(curUserId)) {
+            props.likePostAction(curPostId);
+        } else {
+            props.unLikePostAction(curPostId);
+        }
     };
 
     return (
@@ -50,7 +43,8 @@ const PostItem = props => {
                         Posted on 04/16/2019
                     </p>
                     <Button as='div' labelPosition='right'>
-                        <Button basic={!curPost.likes.map(like => like.user).includes(curUserId)} color='red' onClick={handleLikePost}>
+                        <Button basic={!curPost.likes.map(like => like.user).includes(curUserId)} color='red'
+                                onClick={handleLikePost}>
                             <Icon name='heart'/>
                             Like
                         </Button>
@@ -77,7 +71,8 @@ PostItem.propTypes = {
     auth: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
     getAllPostsAction: PropTypes.func.isRequired,
-    likePostAction: PropTypes.func.isRequired
+    likePostAction: PropTypes.func.isRequired,
+    unLikePostAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -86,7 +81,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionToProps = {
-    likePostAction, getAllPostsAction
+    likePostAction,
+    unLikePostAction,
+    getAllPostsAction
 }
 
 export default connect(mapStateToProps, mapActionToProps)(PostItem);

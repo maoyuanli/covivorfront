@@ -10,3 +10,4 @@ export const LOGOUT = 'LOGOUT';
 export const GET_PROFILE = 'GET_PROFILE';
 export const GET_ALL_PROFILES = 'GET_ALL_PROFILES';
 export const GET_ALL_POSTS = 'GET_ALL_POSTS';
+export const UPDATE_LIKES = 'UPDATE_LIKES';
