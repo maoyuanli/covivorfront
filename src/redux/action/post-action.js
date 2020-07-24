@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_ALL_POSTS} from "./action-constants";
+import {GET_ALL_POSTS, GET_PROFILE} from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
 
 export const getAllPostsAction = () => async dispatch => {
@@ -15,5 +15,19 @@ export const getAllPostsAction = () => async dispatch => {
     }
 };
 
-
+export const likePostAction = (postId) => async dispatch => {
+    try {
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        }
+        const body = JSON.stringify({postId: postId});
+        await axios.put('http://localhost:3000/api/post/like', body, config)
+    } catch (e) {
+        console.log(e)
+    }
+};
 

@@ -7,8 +7,8 @@ import {Button, Grid, Header, Icon, Image, Message} from "semantic-ui-react";
 
 const Profile = props => {
     useEffect(() => {
-        getProfileAction();
-    }, [getProfileAction])
+        props.getProfileAction();
+    }, [props.getProfileAction])
 
     let curProfile = null;
     let profileBelongsCurUser = false

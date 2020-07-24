@@ -1,14 +1,34 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Icon, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
+import {getAllPostsAction, likePostAction} from "../../redux/action/post-action";
 
 const PostItem = props => {
+    useEffect(() => {
+        props.getAllPostsAction();
+    }, [props.post.loading])
+
     const randInt = Math.floor(Math.random() * 100);
     const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
-    const usersLiked = props.post.likes.map(like=>like.user);
+
+    const curPostId = props.postId;
+    // const curPost = props.post.posts.filter(p => p._id === curPostId)[0];
     const curUserId = props.auth.user ? props.auth.user._id : 0
-    const alreadyLiked = usersLiked.includes(curUserId);
+
+
+    const [postState, setPostState] = useState({
+        curPost: props.post.posts.filter(p => p._id === curPostId)[0]
+    });
+
+    const {curPost} = postState;
+
+    const handleLikePost = () => {
+        props.likePostAction(curPostId);
+
+        props.post.loading = !props.post.loading;
+    };
+
     return (
         <Fragment>
             <div className="post bg-white p-1 my-1">
@@ -19,28 +39,28 @@ const PostItem = props => {
                             src={hostPhotoURL}
                             alt=""
                         />
-                        <h4>{props.post.user.fullname}</h4>
+                        <h4>{curPost.user.fullname}</h4>
                     </a>
                 </div>
                 <div>
                     <p className="my-1">
-                        {props.post.text}
+                        {curPost.text}
                     </p>
                     <p className="post-date">
                         Posted on 04/16/2019
                     </p>
                     <Button as='div' labelPosition='right'>
-                        <Button basic={!alreadyLiked} color='red'>
-                            <Icon name='heart' />
+                        <Button basic={!curPost.likes.map(like => like.user).includes(curUserId)} color='red' onClick={handleLikePost}>
+                            <Icon name='heart'/>
                             Like
                         </Button>
                         <Label as='a' basic color='red' pointing='left'>
-                            {props.post.likes.length }
+                            {curPost.likes.length}
                         </Label>
                     </Button>
                     <Button as='div' labelPosition='right'>
                         <Button basic color='blue'>
-                            <Icon name='fork' />
+                            <Icon name='fork'/>
                             Discussion
                         </Button>
                         <Label as='a' basic color='blue' pointing='left'>
@@ -54,15 +74,19 @@ const PostItem = props => {
 };
 
 PostItem.propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    post: PropTypes.object.isRequired,
+    getAllPostsAction: PropTypes.func.isRequired,
+    likePostAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    auth: state.authReducer
+    auth: state.authReducer,
+    post: state.postReducer,
 });
 
 const mapActionToProps = {
-
+    likePostAction, getAllPostsAction
 }
 
 export default connect(mapStateToProps, mapActionToProps)(PostItem);

@@ -37,7 +37,7 @@ const AllPosts = props => {
 
                     <div>
                         {props.post.posts.map(p=>(
-                            <PostItem key={p._id} post={p} />
+                            <PostItem key={p._id} postId={p._id} />
                         ))}
                     </div>
                 </Fragment>
