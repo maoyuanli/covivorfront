@@ -24,6 +24,7 @@ const Post = props => {
     const handleCreateComment = (e) => {
         e.preventDefault();
         props.commentPostAction(propsPassed.id, newCommentText);
+        setCommentTest({newCommentText: ''})
     }
 
 
@@ -66,7 +67,7 @@ const Post = props => {
                                       name="newCommentText"
                                       cols="30"
                                       rows="5"
-                                      placeholder="Create a post"
+                                      placeholder="Type your comment"
                                       required
                                       value={newCommentText} onChange={e => handleTextOnChange(e)}
                                   />
@@ -94,10 +95,11 @@ const Post = props => {
                                 <p className="post-date">
                                     {c.date}
                                 </p>
+                                {props.auth.user._id === c.user &&
+                                (<Button onClick={(event) => handleDeleteComment(event, c._id)}
+                                         color='brown'>Delete</Button>)}
                             </div>
-                            {props.auth.user._id === c.user &&
-                            (<Button onClick={(event) => handleDeleteComment(event, c._id)}
-                                     color='brown'>Delete</Button>)}
+
                         </div>
                     ))}
                 </div>

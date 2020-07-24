@@ -10,11 +10,11 @@ const AllPosts = props => {
         props.getAllPostsAction();
     }, [props.getAllPostsAction])
 
-    const [creatPostText, setCreatePostTest] = useState({newPostText: ''});
+    const [creatPostText, setCreatePostText] = useState({newPostText: ''});
     const {newPostText} = creatPostText;
 
     const handleTextOnChange = (e) => {
-        setCreatePostTest(
+        setCreatePostText(
             {...creatPostText, [e.target.name]: e.target.value}
         )
     };
@@ -22,6 +22,7 @@ const AllPosts = props => {
     const handleCreatePost = (e) => {
         e.preventDefault();
         props.createPostAction(newPostText);
+        setCreatePostText({newPostText: ''})
     }
 
     return (
@@ -31,12 +32,12 @@ const AllPosts = props => {
                     <h1 className="large text-primary">
                         Posts
                     </h1>
-                    <p className="lead"><Icon className="user"/> Welcome to the community!</p>
+                    <p className="lead"><Icon className="user"/> Welcome to the Surviviors community!</p>
 
                     {props.auth.isAuthenticated &&
                     (<div className="post-form">
                         <div className="bg-primary p">
-                            <h3>Say Something...</h3>
+                            <h3>Share...</h3>
                         </div>
                         <form className="form my-1" onSubmit={handleCreatePost}>
                                   <textarea

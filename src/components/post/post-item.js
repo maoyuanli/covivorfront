@@ -68,10 +68,10 @@ const PostItem = props => {
                         }}
                         labelPosition='right'>
                         <Button basic color='blue'>
-                            <Icon name='fork'/>
-                            Discussion
+                            <Icon name='comments'/>
+                            Comments
                         </Button>
-                        <Label basic color='blue' pointing='left'> 28 </Label>
+                        <Label basic color='blue' pointing='left'> {curPost.comments.length} </Label>
                     </Button>
                     {curUserId === curPost.user._id &&
                     (<Button onClick={handleDeletePost} color='brown'>Delete</Button>)}
