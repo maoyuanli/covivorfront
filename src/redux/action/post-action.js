@@ -83,3 +83,16 @@ export const commentPostAction = (postId, text) => async dispatch => {
         console.log(e)
     }
 };
+
+export const unCommentPostAction = (postId, commentId) => async dispatch => {
+    try {
+        const body = JSON.stringify({postId, commentId});
+        const res = await axios.put('http://localhost:3000/api/post/uncomment', body, setRequestConfig())
+        dispatch({
+            type: UPDATE_COMMENTS,
+            payload: {postId, comments: res.data.comments}
+        })
+    } catch (e) {
+        console.log(e)
+    }
+};

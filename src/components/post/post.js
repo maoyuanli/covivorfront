@@ -1,14 +1,13 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
-import {commentPostAction, getAllPostsAction} from "../../redux/action/post-action";
+import {commentPostAction, getAllPostsAction, unCommentPostAction} from "../../redux/action/post-action";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import {Button} from "semantic-ui-react";
 
 const Post = props => {
-    useEffect(()=>{
+    useEffect(() => {
         props.getAllPostsAction()
-    },[props.getAllPostsAction])
+    }, [props.getAllPostsAction])
 
 
     const propsPassed = props.location.postProps;
@@ -24,13 +23,19 @@ const Post = props => {
 
     const handleCreateComment = (e) => {
         e.preventDefault();
-        props.commentPostAction(propsPassed.id,newCommentText);
+        props.commentPostAction(propsPassed.id, newCommentText);
     }
 
-    if(!propsPassed){
+
+    const handleDeleteComment = (e, commentId) => {
+        e.preventDefault();
+        props.unCommentPostAction(propsPassed.id, commentId)
+    };
+
+    if (!propsPassed) {
         props.history.push('/allposts')
-    }else{
-        const curPost = props.post.posts.filter(p=>p._id === propsPassed.id)[0]
+    } else {
+        const curPost = props.post.posts.filter(p => p._id === propsPassed.id)[0]
         return (
             <Fragment>
                 <Link to='/allposts' className="btn">Back To Posts</Link>
@@ -70,7 +75,7 @@ const Post = props => {
                 </div>
 
                 <div className="comments">
-                    {curPost.comments.map(c=>(
+                    {curPost.comments.map(c => (
                         <div className="post bg-white p-1 my-1">
                             <div>
                                 <a>
@@ -91,7 +96,8 @@ const Post = props => {
                                 </p>
                             </div>
                             {props.auth.user._id === c.user &&
-                            (<Button onClick={''} color='brown'>Delete</Button>)}
+                            (<Button onClick={(event) => handleDeleteComment(event, c._id)}
+                                     color='brown'>Delete</Button>)}
                         </div>
                     ))}
                 </div>
@@ -102,9 +108,7 @@ const Post = props => {
     return null;
 };
 
-Post.propTypes = {
-    
-};
+Post.propTypes = {};
 
 const mapStateToProps = state => ({
     post: state.postReducer,
@@ -113,7 +117,8 @@ const mapStateToProps = state => ({
 
 const mapActionToProps = {
     getAllPostsAction,
-    commentPostAction
+    commentPostAction,
+    unCommentPostAction
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withRouter(Post));

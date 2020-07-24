@@ -61,8 +61,8 @@ const PostItem = props => {
                     <Button
                         as={Link}
                         to={{
-                            pathname:'/post',
-                            postProps:{
+                            pathname: '/post',
+                            postProps: {
                                 id: curPostId
                             }
                         }}
