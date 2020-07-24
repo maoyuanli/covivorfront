@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {commentPostAction, getAllPostsAction} from "../../redux/action/post-action";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
+import {Button} from "semantic-ui-react";
 
 const Post = props => {
     useEffect(()=>{
@@ -69,61 +70,31 @@ const Post = props => {
                 </div>
 
                 <div className="comments">
-                    <div className="post bg-white p-1 my-1">
-                        <div>
-                            <a href="profile.html">
-                                <img
-                                    className="round-img"
-                                    src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-                                    alt=""
-                                />
-                                <h4>John Doe</h4>
-                            </a>
+                    {curPost.comments.map(c=>(
+                        <div className="post bg-white p-1 my-1">
+                            <div>
+                                <a>
+                                    <img
+                                        className="round-img"
+                                        src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+                                        alt=""
+                                    />
+                                    <h4>{c.fullname}</h4>
+                                </a>
+                            </div>
+                            <div>
+                                <p className="my-1">
+                                    {c.text}
+                                </p>
+                                <p className="post-date">
+                                    {c.date}
+                                </p>
+                            </div>
+                            {props.auth.user._id === c.user &&
+                            (<Button onClick={''} color='brown'>Delete</Button>)}
                         </div>
-                        <div>
-                            <p className="my-1">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                                possimus corporis sunt necessitatibus! Minus nesciunt soluta
-                                suscipit nobis. Amet accusamus distinctio cupiditate blanditiis
-                                dolor? Illo perferendis eveniet cum cupiditate aliquam?
-                            </p>
-                            <p className="post-date">
-                                Posted on 04/16/2019
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="post bg-white p-1 my-1">
-                        <div>
-                            <a href="profile.html">
-                                <img
-                                    className="round-img"
-                                    src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-                                    alt=""
-                                />
-                                <h4>John Doe</h4>
-                            </a>
-                        </div>
-                        <div>
-                            <p className="my-1">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                                possimus corporis sunt necessitatibus! Minus nesciunt soluta
-                                suscipit nobis. Amet accusamus distinctio cupiditate blanditiis
-                                dolor? Illo perferendis eveniet cum cupiditate aliquam?
-                            </p>
-                            <p className="post-date">
-                                Posted on 04/16/2019
-                            </p>
-                            <button
-                                type="button"
-                                className="btn btn-danger"
-                            >
-                                <i className="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
+                    ))}
                 </div>
-
             </Fragment>
         );
     }
