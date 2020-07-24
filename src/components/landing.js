@@ -13,7 +13,7 @@ const Landing = (props) => {
     const {email, pass} = formData;
 
     if (props.isAuthenticated) {
-        return (<Redirect to='/dashboard'/>);
+        return (<Redirect to='/allposts'/>);
     }
 
 
