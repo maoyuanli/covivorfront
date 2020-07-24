@@ -12,18 +12,18 @@ const Post = props => {
 
     const propsPassed = props.location.postProps;
 
-    const [creatPostText, setCreatePostTest] = useState({newPostText: ''});
-    const {newPostText} = creatPostText;
+    const [commentText, setCommentTest] = useState({newCommentText: ''});
+    const {newCommentText} = commentText;
 
     const handleTextOnChange = (e) => {
-        setCreatePostTest(
-            {...creatPostText, [e.target.name]: e.target.value}
+        setCommentTest(
+            {...commentText, [e.target.name]: e.target.value}
         )
     };
 
-    const handleCreatePost = (e) => {
+    const handleCreateComment = (e) => {
         e.preventDefault();
-        props.commentPostAction(propsPassed.id,newPostText);
+        props.commentPostAction(propsPassed.id,newCommentText);
     }
 
     if(!propsPassed){
@@ -55,14 +55,14 @@ const Post = props => {
                     <div className="bg-primary p">
                         <h3>Leave A Comment</h3>
                     </div>
-                    <form className="form my-1" onSubmit={handleCreatePost}>
+                    <form className="form my-1" onSubmit={handleCreateComment}>
                                   <textarea
-                                      name="newPostText"
+                                      name="newCommentText"
                                       cols="30"
                                       rows="5"
                                       placeholder="Create a post"
                                       required
-                                      value={newPostText} onChange={e => handleTextOnChange(e)}
+                                      value={newCommentText} onChange={e => handleTextOnChange(e)}
                                   />
                         <input type="submit" className="btn btn-dark my-1" value="Submit"/>
                     </form>
