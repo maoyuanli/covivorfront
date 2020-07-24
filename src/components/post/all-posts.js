@@ -1,7 +1,7 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {getAllPostsAction} from "../../redux/action/post-action";
+import {createPostAction, getAllPostsAction} from "../../redux/action/post-action";
 import {Icon} from "semantic-ui-react";
 import PostItem from "./post-item";
 
@@ -9,6 +9,20 @@ const AllPosts = props => {
     useEffect(() => {
         props.getAllPostsAction();
     }, [props.getAllPostsAction])
+
+    const [creatPostText, setCreatePostTest] = useState({newPostText: ''});
+    const {newPostText} = creatPostText;
+
+    const handleTextOnChange = (e) => {
+        setCreatePostTest(
+            {...creatPostText, [e.target.name]: e.target.value}
+        )
+    };
+
+    const handleCreatePost = (e) => {
+        e.preventDefault();
+        props.createPostAction(newPostText);
+    }
 
     return (
         <Fragment>
@@ -19,21 +33,24 @@ const AllPosts = props => {
                     </h1>
                     <p className="lead"><Icon className="user"/> Welcome to the community!</p>
 
-                    {props.auth.isAuthenticated && (<div className="post-form">
+                    {props.auth.isAuthenticated &&
+                    (<div className="post-form">
                         <div className="bg-primary p">
                             <h3>Say Something...</h3>
                         </div>
-                        <form className="form my-1">
-                              <textarea
-                                  name="text"
-                                  cols="30"
-                                  rows="5"
-                                  placeholder="Create a post"
-                                  required
-                              />
+                        <form className="form my-1" onSubmit={handleCreatePost}>
+                                  <textarea
+                                      name="newPostText"
+                                      cols="30"
+                                      rows="5"
+                                      placeholder="Create a post"
+                                      required
+                                      value={newPostText} onChange={e => handleTextOnChange(e)}
+                                  />
                             <input type="submit" className="btn btn-dark my-1" value="Submit"/>
                         </form>
-                    </div>)}
+                    </div>)
+                    }
 
                     <div>
                         {props.post.posts.map(p => (
@@ -48,7 +65,8 @@ const AllPosts = props => {
 
 AllPosts.propTypes = {
     post: PropTypes.object.isRequired,
-    getAllPostsAction: PropTypes.func.isRequired
+    getAllPostsAction: PropTypes.func.isRequired,
+    createPostAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -57,7 +75,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionToProps = {
-    getAllPostsAction
+    getAllPostsAction,
+    createPostAction
 }
 
 export default connect(mapStateToProps, mapActionToProps)(AllPosts);

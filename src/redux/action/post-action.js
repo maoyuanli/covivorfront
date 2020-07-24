@@ -41,3 +41,20 @@ export const unLikePostAction = (postId) => async dispatch => {
         console.log(e)
     }
 };
+
+export const createPostAction = (postText) => async dispatch => {
+    try {
+        const body = JSON.stringify({
+            post: {
+                text: postText
+            }
+        })
+        const res = await axios.post('http://localhost:3000/api/post/create', body, setRequestConfig())
+        dispatch({
+            type: GET_ALL_POSTS,
+            payload: res.data.posts
+        })
+    } catch (e) {
+
+    }
+};
