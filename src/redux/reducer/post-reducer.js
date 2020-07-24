@@ -1,4 +1,4 @@
-import {GET_ALL_POSTS, UPDATE_LIKES} from "../action/action-constants";
+import {GET_ALL_POSTS, UPDATE_COMMENTS, UPDATE_LIKES} from "../action/action-constants";
 
 const initState = {
     post: null,
@@ -17,6 +17,13 @@ const postReducer = (state = initState, action) => {
                 ...state,
                 posts: state.posts.map(p => p._id === payload.postId ?
                     {...p, likes: payload.likes} : p),
+                loading: false
+            };
+        case UPDATE_COMMENTS:
+            return {
+                ...state,
+                posts: state.posts.map(p => p._id === payload.postId ?
+                    {...p, comments: payload.comments} : p),
                 loading: false
             };
         default:

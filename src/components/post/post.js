@@ -1,6 +1,6 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {getAllPostsAction} from "../../redux/action/post-action";
+import {commentPostAction, getAllPostsAction} from "../../redux/action/post-action";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 
@@ -9,7 +9,23 @@ const Post = props => {
         props.getAllPostsAction()
     },[props.getAllPostsAction])
 
+
     const propsPassed = props.location.postProps;
+
+    const [creatPostText, setCreatePostTest] = useState({newPostText: ''});
+    const {newPostText} = creatPostText;
+
+    const handleTextOnChange = (e) => {
+        setCreatePostTest(
+            {...creatPostText, [e.target.name]: e.target.value}
+        )
+    };
+
+    const handleCreatePost = (e) => {
+        e.preventDefault();
+        props.commentPostAction(propsPassed.id,newPostText);
+    }
+
     if(!propsPassed){
         props.history.push('/allposts')
     }else{
@@ -39,14 +55,15 @@ const Post = props => {
                     <div className="bg-primary p">
                         <h3>Leave A Comment</h3>
                     </div>
-                    <form className="form my-1">
-          <textarea
-              name="text"
-              cols="30"
-              rows="5"
-              placeholder="Comment on this post"
-              required
-          />
+                    <form className="form my-1" onSubmit={handleCreatePost}>
+                                  <textarea
+                                      name="newPostText"
+                                      cols="30"
+                                      rows="5"
+                                      placeholder="Create a post"
+                                      required
+                                      value={newPostText} onChange={e => handleTextOnChange(e)}
+                                  />
                         <input type="submit" className="btn btn-dark my-1" value="Submit"/>
                     </form>
                 </div>
@@ -124,7 +141,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionToProps = {
-    getAllPostsAction
+    getAllPostsAction,
+    commentPostAction
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withRouter(Post));

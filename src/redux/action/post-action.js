@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_ALL_POSTS, UPDATE_LIKES} from "./action-constants";
+import {GET_ALL_POSTS, UPDATE_COMMENTS, UPDATE_LIKES} from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
 import {setRequestConfig} from "../../utils/set-request-config";
 
@@ -65,6 +65,19 @@ export const deletePostAction = (postId) => async dispatch => {
         dispatch({
             type: GET_ALL_POSTS,
             payload: res.data.posts
+        })
+    } catch (e) {
+        console.log(e)
+    }
+};
+
+export const commentPostAction = (postId, text) => async dispatch => {
+    try {
+        const body = JSON.stringify({postId, text});
+        const res = await axios.put('http://localhost:3000/api/post/comment', body, setRequestConfig())
+        dispatch({
+            type: UPDATE_COMMENTS,
+            payload: {postId, comments: res.data.comments}
         })
     } catch (e) {
         console.log(e)
