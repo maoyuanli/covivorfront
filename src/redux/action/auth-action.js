@@ -10,6 +10,7 @@ import {
 } from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
 import setAuthToken from "../../utils/set-auth-token";
+import {setRequestConfig} from "../../utils/set-request-config";
 
 export const registerAction = ({name, email, password}) => async dispatch => {
     try {
@@ -18,13 +19,8 @@ export const registerAction = ({name, email, password}) => async dispatch => {
             fullname: name,
             password: password
         }
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
         const body = JSON.stringify(newUser);
-        const res = await axios.post('http://localhost:3000/api/user/register', body, config)
+        const res = await axios.post('http://localhost:3000/api/user/register', body, setRequestConfig(false))
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
@@ -49,11 +45,7 @@ export const loadUserAction = () => async dispatch => {
     }
 
     try {
-        const token = localStorage.getItem('token');
-        const headers = {
-            'Authorization': token
-        }
-        const res = await axios.get('http://localhost:3000/api/user/auth', {headers})
+        const res = await axios.get('http://localhost:3000/api/user/auth', setRequestConfig())
         dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -71,13 +63,8 @@ export const loginAction = (email, password) => async dispatch => {
             username: email,
             password: password
         }
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
         const body = JSON.stringify(user);
-        const res = await axios.post('http://localhost:3000/api/user/login', body, config)
+        const res = await axios.post('http://localhost:3000/api/user/login', body, setRequestConfig(false))
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
