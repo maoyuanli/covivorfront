@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {GET_ALL_PROFILES, GET_PROFILE} from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
+import {setRequestConfig} from "../../utils/set-request-config";
 
 export const getProfileAction = () => async dispatch => {
     try {
@@ -30,15 +31,8 @@ export const getAllProfilesAction = () => async dispatch => {
 
 export const upsertProfileAction = (formData, history) => async dispatch => {
     try {
-        const token = localStorage.getItem('token');
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
-            }
-        }
         const body = JSON.stringify({profile: formData});
-        const res = await axios.post('http://localhost:3000/api/profile/upsert', body, config)
+        const res = await axios.post('http://localhost:3000/api/profile/upsert', body, setRequestConfig())
         dispatch({
             type: GET_PROFILE,
             payload: res.data
