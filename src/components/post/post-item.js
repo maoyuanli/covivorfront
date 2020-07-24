@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Button, Icon, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {deletePostAction, getAllPostsAction, likePostAction, unLikePostAction} from "../../redux/action/post-action";
+import {Link} from "react-router-dom";
 
 const PostItem = props => {
 
@@ -57,14 +58,20 @@ const PostItem = props => {
                             {curPost.likes.length}
                         </Label>
                     </Button>
-                    <Button as='div' labelPosition='right'>
+                    <Button
+                        as={Link}
+                        to={{
+                            pathname:'/post',
+                            postProps:{
+                                id: curPostId
+                            }
+                        }}
+                        labelPosition='right'>
                         <Button basic color='blue'>
                             <Icon name='fork'/>
                             Discussion
                         </Button>
-                        <Label as='a' basic color='blue' pointing='left'>
-                            28
-                        </Label>
+                        <Label basic color='blue' pointing='left'> 28 </Label>
                     </Button>
                     {curUserId === curPost.user._id &&
                     (<Button onClick={handleDeletePost} color='brown'>Delete</Button>)}
