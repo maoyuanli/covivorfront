@@ -12,6 +12,8 @@ const Post = props => {
 
     const propsPassed = props.location.postProps;
 
+    const curUserId = props.auth.user ? props.auth.user._id : 0;
+
     const [commentText, setCommentTest] = useState({newCommentText: ''});
     const {newCommentText} = commentText;
 
@@ -59,10 +61,15 @@ const Post = props => {
                 </div>
 
                 <div className="post-form">
-                    <div className="bg-primary p">
-                        <h3>Leave A Comment</h3>
-                    </div>
-                    <form className="form my-1" onSubmit={handleCreateComment}>
+                    {curUserId === 0 ?
+                        (<div className="bg-primary p">
+                            <h3>Log in to comment</h3>
+                        </div>) : (
+                            <Fragment>
+                                <div className="bg-primary p">
+                                    <h3>Leave A Comment</h3>
+                                </div>
+                                <form className="form my-1" onSubmit={handleCreateComment}>
                                   <textarea
                                       name="newCommentText"
                                       cols="30"
@@ -71,8 +78,10 @@ const Post = props => {
                                       required
                                       value={newCommentText} onChange={e => handleTextOnChange(e)}
                                   />
-                        <input type="submit" className="btn btn-dark my-1" value="Submit"/>
-                    </form>
+                                    <input type="submit" className="btn btn-dark my-1" value="Submit"/>
+                                </form>
+                            </Fragment>
+                        )}
                 </div>
 
                 <div className="comments">
@@ -95,7 +104,7 @@ const Post = props => {
                                 <p className="post-date">
                                     {c.date}
                                 </p>
-                                {props.auth.user._id === c.user &&
+                                {curUserId === c.user &&
                                 (<Button onClick={(event) => handleDeleteComment(event, c._id)}
                                          color='brown'>Delete</Button>)}
                             </div>
