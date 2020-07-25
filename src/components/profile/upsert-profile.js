@@ -55,7 +55,7 @@ const UpsertProfile = props => {
         props.upsertProfileAction(formData, props.history);
 
     };
-    
+
     return (
         <Fragment>
             <h1 className="large text-primary">

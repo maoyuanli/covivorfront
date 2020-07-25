@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from 'react';
 import {commentPostAction, getAllPostsAction, unCommentPostAction} from "../../redux/action/post-action";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
-import {Button, Image} from "semantic-ui-react";
+import {Button, Image, Item, ItemGroup} from "semantic-ui-react";
 
 const Post = props => {
     useEffect(() => {
@@ -13,7 +13,6 @@ const Post = props => {
     const propsPassed = props.location.postProps;
 
     const curUserId = props.auth.user ? props.auth.user._id : 0;
-    // const curProfile = props.profile.profiles.filter(p=>p.user._id === curUserId)[0];
 
     const [commentText, setCommentTest] = useState({newCommentText: ''});
     const {newCommentText} = commentText;
@@ -45,12 +44,12 @@ const Post = props => {
             <Fragment>
                 <Link to='/allposts' className="btn">Back To Posts</Link>
                 <div className="post bg-white p-1 my-1">
-                    <div>
-                        <a>
+                    <ItemGroup>
+                        <Item>
                             {!props.profile.loading && (<Image src={curPostUserProfile.photoUrl}/>)}
-                            <h4>{curPost.user.fullname}</h4>
-                        </a>
-                    </div>
+                        </Item>
+                        <Item><h4>{curPost.user.fullname}</h4></Item>
+                    </ItemGroup>
                     <div>
                         <p className="my-1">
                             {curPost.text}

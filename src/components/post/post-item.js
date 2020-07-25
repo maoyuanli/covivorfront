@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Icon, Image, Label} from "semantic-ui-react";
+import {Button, Icon, Image, Item, ItemGroup, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {deletePostAction, getAllPostsAction, likePostAction, unLikePostAction} from "../../redux/action/post-action";
 import {Link} from "react-router-dom";
@@ -33,12 +33,13 @@ const PostItem = props => {
     return (
         <Fragment>
             <div className="post bg-white p-1 my-1">
-                <div>
-                    <a>
+                <ItemGroup>
+                    <Item>
                         {!props.profile.loading && (<Image src={postUserProfile.photoUrl}/>)}
-                        <h4>{curPost.user.fullname}</h4>
-                    </a>
-                </div>
+
+                    </Item>
+                    <Item><h4>{curPost.user.fullname}</h4></Item>
+                </ItemGroup>
                 <div>
                     <p className="my-1">
                         {curPost.text}
