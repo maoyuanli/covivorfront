@@ -16,7 +16,7 @@ const PostItem = props => {
     const curPost = props.postPassed;
     const curPostId = props.postPassed._id;
     const curUserId = props.auth.user ? props.auth.user._id : 0
-    const curProfile = props.profile.profiles.filter(p=>p.user._id === curUserId)[0];
+    const postUserProfile = props.profile.profiles.filter(p=>p.user._id === curPost.user._id)[0];
 
     const handleLikePost = () => {
         if (!curPost.likes.map(like => like.user).includes(curUserId)) {
@@ -36,7 +36,7 @@ const PostItem = props => {
             <div className="post bg-white p-1 my-1">
                 <div>
                     <a>
-                        { !props.profile.loading &&(<Image src={curProfile.photoUrl}/>)}
+                        { !props.profile.loading &&(<Image src={postUserProfile.photoUrl}/>)}
                         <h4>{curPost.user.fullname}</h4>
                     </a>
                 </div>

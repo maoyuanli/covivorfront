@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from 'react';
 import {commentPostAction, getAllPostsAction, unCommentPostAction} from "../../redux/action/post-action";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
-import {Button} from "semantic-ui-react";
+import {Button, Image} from "semantic-ui-react";
 import DummyPhoto from "../../utils/dummy-photo";
 import {getAllProfilesAction} from "../../redux/action/profile-action";
 
@@ -42,13 +42,14 @@ const Post = props => {
         props.history.push('/allposts')
     } else {
         const curPost = props.post.posts.filter(p => p._id === propsPassed.id)[0]
+        const curPostUserProfile = props.profile.profiles.filter(p=>p.user._id === curPost.user._id)[0];
         return (
             <Fragment>
                 <Link to='/allposts' className="btn">Back To Posts</Link>
                 <div className="post bg-white p-1 my-1">
                     <div>
                         <a>
-                            <DummyPhoto/>
+                            { !props.profile.loading &&(<Image src={curPostUserProfile.photoUrl}/>)}
                             <h4>{curPost.user.fullname}</h4>
                         </a>
                     </div>
