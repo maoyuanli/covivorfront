@@ -355,6 +355,10 @@ button {
     height: 100vh;
 }
 
+.dark-overlay{
+    opacity: 80%;
+}
+
 .landing-inner {
     color: #fff;
     height: 100%;
