@@ -4,7 +4,6 @@ import {Button, Icon, Image, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {deletePostAction, getAllPostsAction, likePostAction, unLikePostAction} from "../../redux/action/post-action";
 import {Link} from "react-router-dom";
-import DummyPhoto from "../../utils/dummy-photo";
 import {getAllProfilesAction} from "../../redux/action/profile-action";
 
 const PostItem = props => {
@@ -16,7 +15,7 @@ const PostItem = props => {
     const curPost = props.postPassed;
     const curPostId = props.postPassed._id;
     const curUserId = props.auth.user ? props.auth.user._id : 0
-    const postUserProfile = props.profile.profiles.filter(p=>p.user._id === curPost.user._id)[0];
+    const postUserProfile = props.profile.profiles.filter(p => p.user._id === curPost.user._id)[0];
 
     const handleLikePost = () => {
         if (!curPost.likes.map(like => like.user).includes(curUserId)) {
@@ -36,7 +35,7 @@ const PostItem = props => {
             <div className="post bg-white p-1 my-1">
                 <div>
                     <a>
-                        { !props.profile.loading &&(<Image src={postUserProfile.photoUrl}/>)}
+                        {!props.profile.loading && (<Image src={postUserProfile.photoUrl}/>)}
                         <h4>{curPost.user.fullname}</h4>
                     </a>
                 </div>

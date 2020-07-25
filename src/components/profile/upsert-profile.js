@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {connect} from "react-redux";
-import {Icon} from "semantic-ui-react";
+import {Icon, Image} from "semantic-ui-react";
 import {getProfileAction, upsertProfileAction} from "../../redux/action/profile-action";
 import PropTypes from 'prop-types';
 import {Link, withRouter} from "react-router-dom";
@@ -9,6 +9,7 @@ const UpsertProfile = props => {
     const [formData, setFormData] = useState({
         location: '',
         bio: '',
+        photoUrl: '',
         youtube: '',
         twitter: '',
         facebook: '',
@@ -19,6 +20,7 @@ const UpsertProfile = props => {
     const {
         location,
         bio,
+        photoUrl,
         youtube,
         twitter,
         facebook,
@@ -35,6 +37,7 @@ const UpsertProfile = props => {
         setFormData({
             location: loadedProf ? loadedProf.location : '',
             bio: loadedProf ? loadedProf.bio : '',
+            photoUrl: loadedProf ? loadedProf.photoUrl : '',
             youtube: loadedProf ? loadedProf.youtube : '',
             twitter: loadedProf ? loadedProf.twitter : '',
             facebook: loadedProf ? loadedProf.facebook : '',
@@ -52,8 +55,7 @@ const UpsertProfile = props => {
         props.upsertProfileAction(formData, props.history);
 
     };
-
-
+    
     return (
         <Fragment>
             <h1 className="large text-primary">
@@ -63,6 +65,7 @@ const UpsertProfile = props => {
                 <Icon name='user'/> Let's get some information to make your
                 profile stand out
             </p>
+            <Image src={photoUrl} size='small'/>
             <small>* = required field</small>
             <form className="form" onSubmit={handleOnSubmit}>
                 <div className="form-group">
@@ -70,14 +73,22 @@ const UpsertProfile = props => {
                            value={location} onChange={e => handleOnChange(e)}
                     />
                     <small className="form-text"
-                    >City & state suggested (eg. Toronto, ON)</small
+                    >City & Province suggested (eg. Toronto, ON) *</small
                     >
                 </div>
                 <div className="form-group">
                     <textarea placeholder="* A short bio of yourself" name="bio" required
                               value={bio} onChange={e => handleOnChange(e)}
                     />
-                    <small className="form-text">Tell us a little about yourself</small>
+                    <small className="form-text">Tell us a little about yourself *</small>
+                </div>
+                <div className="form-group">
+                    <input type="text" placeholder="Profile Photo Url Link" name="photoUrl" required
+                           value={photoUrl} onChange={e => handleOnChange(e)}
+                    />
+                    <small className="form-text"
+                    >currently supports photo url, photo upload on the way</small
+                    >
                 </div>
                 <div className="my-2">
                     <div className="my-2">

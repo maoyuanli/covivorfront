@@ -58,7 +58,8 @@ const Profile = props => {
                         </div>
 
                         {profileBelongsCurUser && (
-                            <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile' icon='edit'/>
+                            <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile'
+                                    icon='edit'/>
                         )}
                     </Grid.Column>
                 </Grid>
