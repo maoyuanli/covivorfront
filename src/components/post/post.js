@@ -3,8 +3,6 @@ import {commentPostAction, getAllPostsAction, unCommentPostAction} from "../../r
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import {Button, Image} from "semantic-ui-react";
-import DummyPhoto from "../../utils/dummy-photo";
-import {getAllProfilesAction} from "../../redux/action/profile-action";
 
 const Post = props => {
     useEffect(() => {
@@ -42,14 +40,14 @@ const Post = props => {
         props.history.push('/allposts')
     } else {
         const curPost = props.post.posts.filter(p => p._id === propsPassed.id)[0]
-        const curPostUserProfile = props.profile.profiles.filter(p=>p.user._id === curPost.user._id)[0];
+        const curPostUserProfile = props.profile.profiles.filter(p => p.user._id === curPost.user._id)[0];
         return (
             <Fragment>
                 <Link to='/allposts' className="btn">Back To Posts</Link>
                 <div className="post bg-white p-1 my-1">
                     <div>
                         <a>
-                            { !props.profile.loading &&(<Image src={curPostUserProfile.photoUrl}/>)}
+                            {!props.profile.loading && (<Image src={curPostUserProfile.photoUrl}/>)}
                             <h4>{curPost.user.fullname}</h4>
                         </a>
                     </div>
@@ -85,28 +83,32 @@ const Post = props => {
                 </div>
 
                 <div className="comments">
-                    {curPost.comments.map(c => (
-                        <div key={c._id} className="post bg-white p-1 my-1">
-                            <div>
-                                <a>
-                                    <DummyPhoto/>
-                                    <h4>{c.fullname}</h4>
-                                </a>
-                            </div>
-                            <div>
-                                <p className="my-1">
-                                    {c.text}
-                                </p>
-                                <p className="post-date">
-                                    {c.date}
-                                </p>
-                                {curUserId === c.user &&
-                                (<Button onClick={(event) => handleDeleteComment(event, c._id)}
-                                         color='brown'>Delete</Button>)}
-                            </div>
+                    {curPost.comments.map(c => {
+                            const commentUserProfile = props.profile.profiles.filter(p => p.user._id === c.user)[0];
+                            return (
+                                <div key={c._id} className="post bg-white p-1 my-1">
+                                    <div>
+                                        <a>
+                                            {!props.profile.loading && (<Image src={commentUserProfile.photoUrl}/>)}
+                                            <h4>{c.fullname}</h4>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <p className="my-1">
+                                            {c.text}
+                                        </p>
+                                        <p className="post-date">
+                                            {c.date}
+                                        </p>
+                                        {curUserId === c.user &&
+                                        (<Button onClick={(event) => handleDeleteComment(event, c._id)}
+                                                 color='brown'>Delete</Button>)}
+                                    </div>
 
-                        </div>
-                    ))}
+                                </div>
+                            )
+                        }
+                    )}
                 </div>
             </Fragment>
         );
