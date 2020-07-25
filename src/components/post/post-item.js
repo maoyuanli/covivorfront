@@ -4,6 +4,7 @@ import {Button, Icon, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {deletePostAction, getAllPostsAction, likePostAction, unLikePostAction} from "../../redux/action/post-action";
 import {Link} from "react-router-dom";
+import DummyPhoto from "../../utils/dummy-photo";
 
 const PostItem = props => {
 
@@ -33,11 +34,7 @@ const PostItem = props => {
             <div className="post bg-white p-1 my-1">
                 <div>
                     <a>
-                        <img
-                            className="round-img"
-                            src={hostPhotoURL}
-                            alt=""
-                        />
+                        <DummyPhoto/>
                         <h4>{curPost.user.fullname}</h4>
                     </a>
                 </div>

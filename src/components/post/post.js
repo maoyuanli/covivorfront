@@ -3,6 +3,7 @@ import {commentPostAction, getAllPostsAction, unCommentPostAction} from "../../r
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import {Button} from "semantic-ui-react";
+import DummyPhoto from "../../utils/dummy-photo";
 
 const Post = props => {
     useEffect(() => {
@@ -89,11 +90,7 @@ const Post = props => {
                         <div className="post bg-white p-1 my-1">
                             <div>
                                 <a>
-                                    <img
-                                        className="round-img"
-                                        src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-                                        alt=""
-                                    />
+                                    <DummyPhoto/>
                                     <h4>{c.fullname}</h4>
                                 </a>
                             </div>
