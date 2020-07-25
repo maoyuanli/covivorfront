@@ -14,7 +14,7 @@ const ProfileItem = ({
     const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
     return (
         <Item>
-            <Item.Image><DummyPhoto size='tiny'/></Item.Image>
+            <Item.Image size='small'><DummyPhoto size='tiny'/></Item.Image>
 
 
             <Item.Content>
