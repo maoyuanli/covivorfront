@@ -46,11 +46,7 @@ const Post = props => {
                 <div className="post bg-white p-1 my-1">
                     <div>
                         <a>
-                            <img
-                                className="round-img"
-                                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-                                alt=""
-                            />
+                            <DummyPhoto />
                             <h4>{curPost.user.fullname}</h4>
                         </a>
                     </div>
@@ -87,7 +83,7 @@ const Post = props => {
 
                 <div className="comments">
                     {curPost.comments.map(c => (
-                        <div className="post bg-white p-1 my-1">
+                        <div key={c._id} className="post bg-white p-1 my-1">
                             <div>
                                 <a>
                                     <DummyPhoto/>
