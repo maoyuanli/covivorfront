@@ -7,8 +7,8 @@ import {loginAction} from "../redux/action/auth-action";
 
 const Landing = (props) => {
     const [formData, setFormData] = useState({
-        email: 'user@abc.com',
-        pass: 'password',
+        email: 'guest@account.com',
+        pass: 'abc123',
     });
     const {email, pass} = formData;
 

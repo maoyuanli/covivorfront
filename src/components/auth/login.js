@@ -8,8 +8,8 @@ import {Icon} from "semantic-ui-react";
 const Login = (props) => {
 
     const [formData, setFormData] = useState({
-        email: 'user@abc.com',
-        pass: 'password',
+        email: 'guest@account.com',
+        pass: 'abc123',
     });
 
     const {email, pass} = formData;
