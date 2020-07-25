@@ -2,8 +2,9 @@ import React, {Fragment, useEffect} from 'react';
 import {getProfileAction} from "../redux/action/profile-action";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types'
-import {Icon} from "semantic-ui-react";
+import {Button, Icon} from "semantic-ui-react";
 import UpsertProfile from "./profile/upsert-profile";
+import {Link} from "react-router-dom";
 
 const Dashboard = props => {
     useEffect(() => {
@@ -21,7 +22,7 @@ const Dashboard = props => {
                 </h1>
                 <p className="lead"><Icon name='user'/> Welcome {props.auth.user && props.auth.user.fullname}</p>
                 <Fragment>
-                    <UpsertProfile/>
+                    <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile' icon='edit'/>
                 </Fragment>
             </Fragment>
     );

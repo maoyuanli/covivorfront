@@ -25,13 +25,7 @@ const Profile = props => {
 
         return (
             <Fragment>
-                {profileBelongsCurUser && (
-                    <div className="dash-buttons">
-                        <Link to="/upsert-profile" className="ui primary button"
-                        ><Icon className="edit"/> Edit Profile</Link
-                        >
-                    </div>
-                )}
+
 
                 <Grid>
                     <Grid.Column width={5}>
@@ -62,6 +56,10 @@ const Profile = props => {
                                 <Icon name='youtube'/> {curProfile.youtube}
                             </Button>)}
                         </div>
+
+                        {profileBelongsCurUser && (
+                            <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile' icon='edit'/>
+                        )}
                     </Grid.Column>
                 </Grid>
 
