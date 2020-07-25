@@ -46,7 +46,7 @@ const Post = props => {
                 <div className="post bg-white p-1 my-1">
                     <div>
                         <a>
-                            <DummyPhoto />
+                            <DummyPhoto/>
                             <h4>{curPost.user.fullname}</h4>
                         </a>
                     </div>

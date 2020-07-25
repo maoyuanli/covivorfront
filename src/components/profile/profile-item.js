@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Icon, Item, Message} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import DummyPhoto from "../../utils/dummy-photo";
 
 const ProfileItem = ({
                          profile: {
@@ -13,7 +14,8 @@ const ProfileItem = ({
     const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
     return (
         <Item>
-            <Item.Image size='tiny' src={hostPhotoURL}/>
+            <Item.Image><DummyPhoto size='tiny'/></Item.Image>
+
 
             <Item.Content>
                 <Item.Header as={Link} to={{

@@ -8,9 +8,6 @@ import DummyPhoto from "../../utils/dummy-photo";
 
 const PostItem = props => {
 
-    const randInt = Math.floor(Math.random() * 100);
-    const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
-
     const curPost = props.postPassed;
     const curPostId = props.postPassed._id;
     const curUserId = props.auth.user ? props.auth.user._id : 0
@@ -34,7 +31,7 @@ const PostItem = props => {
             <div className="post bg-white p-1 my-1">
                 <div>
                     <a>
-                        <DummyPhoto/>
+                        <DummyPhoto size='small'/>
                         <h4>{curPost.user.fullname}</h4>
                     </a>
                 </div>
