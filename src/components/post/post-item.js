@@ -1,17 +1,22 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Icon, Label} from "semantic-ui-react";
+import {Button, Icon, Image, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {deletePostAction, getAllPostsAction, likePostAction, unLikePostAction} from "../../redux/action/post-action";
 import {Link} from "react-router-dom";
 import DummyPhoto from "../../utils/dummy-photo";
+import {getAllProfilesAction} from "../../redux/action/profile-action";
 
 const PostItem = props => {
+
+    useEffect(() => {
+        props.getAllProfilesAction();
+    }, [props.getAllProfilesAction]);
 
     const curPost = props.postPassed;
     const curPostId = props.postPassed._id;
     const curUserId = props.auth.user ? props.auth.user._id : 0
-
+    const curProfile = props.profile.profiles.filter(p=>p.user._id === curUserId)[0];
 
     const handleLikePost = () => {
         if (!curPost.likes.map(like => like.user).includes(curUserId)) {
@@ -31,7 +36,7 @@ const PostItem = props => {
             <div className="post bg-white p-1 my-1">
                 <div>
                     <a>
-                        <DummyPhoto size='small'/>
+                        { !props.profile.loading &&(<Image src={curProfile.photoUrl}/>)}
                         <h4>{curPost.user.fullname}</h4>
                     </a>
                 </div>
@@ -40,7 +45,7 @@ const PostItem = props => {
                         {curPost.text}
                     </p>
                     <p className="post-date">
-                        Posted on 04/16/2019
+                        {curPost.date}
                     </p>
                     <Button as='div' labelPosition='right'>
                         <Button basic={!curPost.likes.map(like => like.user).includes(curUserId)} color='red'
@@ -80,19 +85,22 @@ PostItem.propTypes = {
     post: PropTypes.object.isRequired,
     getAllPostsAction: PropTypes.func.isRequired,
     likePostAction: PropTypes.func.isRequired,
-    unLikePostAction: PropTypes.func.isRequired
+    unLikePostAction: PropTypes.func.isRequired,
+    getAllProfilesAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     auth: state.authReducer,
     post: state.postReducer,
+    profile: state.profileReducer
 });
 
 const mapActionToProps = {
     likePostAction,
     unLikePostAction,
     getAllPostsAction,
-    deletePostAction
+    deletePostAction,
+    getAllProfilesAction
 }
 
 export default connect(mapStateToProps, mapActionToProps)(PostItem);

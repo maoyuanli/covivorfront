@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import {Button} from "semantic-ui-react";
 import DummyPhoto from "../../utils/dummy-photo";
+import {getAllProfilesAction} from "../../redux/action/profile-action";
 
 const Post = props => {
     useEffect(() => {
@@ -14,6 +15,7 @@ const Post = props => {
     const propsPassed = props.location.postProps;
 
     const curUserId = props.auth.user ? props.auth.user._id : 0;
+    // const curProfile = props.profile.profiles.filter(p=>p.user._id === curUserId)[0];
 
     const [commentText, setCommentTest] = useState({newCommentText: ''});
     const {newCommentText} = commentText;
@@ -116,13 +118,14 @@ Post.propTypes = {};
 
 const mapStateToProps = state => ({
     post: state.postReducer,
-    auth: state.authReducer
+    auth: state.authReducer,
+    profile: state.profileReducer
 });
 
 const mapActionToProps = {
     getAllPostsAction,
     commentPostAction,
-    unCommentPostAction
+    unCommentPostAction,
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withRouter(Post));

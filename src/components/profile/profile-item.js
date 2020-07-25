@@ -6,21 +6,21 @@ import DummyPhoto from "../../utils/dummy-photo";
 
 const ProfileItem = ({
                          profile: {
-                             user: {fullname}, facebook, instagram, linkedin, location, twitter, youtube, bio, _id
+                             user: {fullname}, facebook, instagram, linkedin, location, twitter, youtube, bio, _id, photoUrl
                          }
                      }) => {
 
-    const randInt = Math.floor(Math.random() * 100);
-    const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
+    // const randInt = Math.floor(Math.random() * 100);
+    // const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
     return (
         <Item>
-            <Item.Image size='small'><DummyPhoto size='tiny'/></Item.Image>
+            <Item.Image size='small' src={photoUrl} />
 
 
             <Item.Content>
                 <Item.Header as={Link} to={{
                     pathname: '/profile',
-                    profileProps: {id: _id, photoUrl: hostPhotoURL}
+                    profileProps: {id: _id, photoUrl: photoUrl}
                 }}>{fullname}</Item.Header>
                 <Message
                     info
