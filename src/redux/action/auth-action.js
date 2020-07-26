@@ -11,6 +11,7 @@ import {
 import {removeAlert, setAlert} from "./alert-action";
 import setAuthToken from "../../utils/set-auth-token";
 import {setRequestConfig} from "../../utils/set-request-config";
+import {config} from "../../utils/config";
 
 export const registerAction = ({name, email, password}) => async dispatch => {
     try {
@@ -20,7 +21,7 @@ export const registerAction = ({name, email, password}) => async dispatch => {
             password: password
         }
         const body = JSON.stringify(newUser);
-        const res = await axios.post('http://localhost:3000/api/user/register', body, setRequestConfig(false))
+        const res = await axios.post(config.URL_PREFIX + 'user/register', body, setRequestConfig(false))
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
@@ -45,7 +46,7 @@ export const loadUserAction = () => async dispatch => {
     }
 
     try {
-        const res = await axios.get('http://localhost:3000/api/user/auth', setRequestConfig())
+        const res = await axios.get(config.URL_PREFIX + 'user/auth', setRequestConfig())
         dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -64,7 +65,7 @@ export const loginAction = (email, password) => async dispatch => {
             password: password
         }
         const body = JSON.stringify(user);
-        const res = await axios.post('http://localhost:3000/api/user/login', body, setRequestConfig(false))
+        const res = await axios.post(config.URL_PREFIX + 'user/login', body, setRequestConfig(false))
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data

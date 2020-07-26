@@ -2,10 +2,11 @@ import axios from "axios";
 import {GET_ALL_POSTS, UPDATE_COMMENTS, UPDATE_LIKES} from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
 import {setRequestConfig} from "../../utils/set-request-config";
+import {config} from "../../utils/config";
 
 export const getAllPostsAction = () => async dispatch => {
     try {
-        const res = await axios.get('http://localhost:3000/api/post/getall');
+        const res = await axios.get(config.URL_PREFIX + 'post/getall');
         dispatch({
             type: GET_ALL_POSTS,
             payload: res.data.posts
@@ -19,7 +20,7 @@ export const getAllPostsAction = () => async dispatch => {
 export const likePostAction = (postId) => async dispatch => {
     try {
         const body = JSON.stringify({postId: postId});
-        const res = await axios.put('http://localhost:3000/api/post/like', body, setRequestConfig())
+        const res = await axios.put(config.URL_PREFIX + 'post/like', body, setRequestConfig())
         dispatch({
             type: UPDATE_LIKES,
             payload: {postId, likes: res.data.likes}
@@ -32,7 +33,7 @@ export const likePostAction = (postId) => async dispatch => {
 export const unLikePostAction = (postId) => async dispatch => {
     try {
         const body = JSON.stringify({postId: postId});
-        const res = await axios.put('http://localhost:3000/api/post/unlike', body, setRequestConfig())
+        const res = await axios.put(config.URL_PREFIX + 'post/unlike', body, setRequestConfig())
         dispatch({
             type: UPDATE_LIKES,
             payload: {postId, likes: res.data.likes}
@@ -49,7 +50,7 @@ export const createPostAction = (postText) => async dispatch => {
                 text: postText
             }
         })
-        const res = await axios.post('http://localhost:3000/api/post/create', body, setRequestConfig())
+        const res = await axios.post(config.URL_PREFIX + 'post/create', body, setRequestConfig())
         dispatch({
             type: GET_ALL_POSTS,
             payload: res.data.posts
@@ -61,7 +62,7 @@ export const createPostAction = (postText) => async dispatch => {
 
 export const deletePostAction = (postId) => async dispatch => {
     try {
-        const res = await axios.delete(`http://localhost:3000/api/post/delete/${postId}`, setRequestConfig())
+        const res = await axios.delete(config.URL_PREFIX + `post/delete/${postId}`, setRequestConfig())
         dispatch({
             type: GET_ALL_POSTS,
             payload: res.data.posts
@@ -74,7 +75,7 @@ export const deletePostAction = (postId) => async dispatch => {
 export const commentPostAction = (postId, text) => async dispatch => {
     try {
         const body = JSON.stringify({postId, text});
-        const res = await axios.put('http://localhost:3000/api/post/comment', body, setRequestConfig())
+        const res = await axios.put(config.URL_PREFIX + 'post/comment', body, setRequestConfig())
         dispatch({
             type: UPDATE_COMMENTS,
             payload: {postId, comments: res.data.comments}
@@ -87,7 +88,7 @@ export const commentPostAction = (postId, text) => async dispatch => {
 export const unCommentPostAction = (postId, commentId) => async dispatch => {
     try {
         const body = JSON.stringify({postId, commentId});
-        const res = await axios.put('http://localhost:3000/api/post/uncomment', body, setRequestConfig())
+        const res = await axios.put(config.URL_PREFIX + 'post/uncomment', body, setRequestConfig())
         dispatch({
             type: UPDATE_COMMENTS,
             payload: {postId, comments: res.data.comments}
