@@ -35,7 +35,7 @@ const Navbar = (props) => {
             <h1>
                 <Link to='/'><Icon className="users"/> CoVivor</Link>
             </h1>
-            <ul style={{fontSize: "large", display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <ul className='right menu' style={{fontSize: "large"}}>
                 <li>
                     <Link to='/allprofiles'>Survivors</Link>
                 </li>
