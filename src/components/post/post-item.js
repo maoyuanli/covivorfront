@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Icon, Image, Item, ItemGroup, Label} from "semantic-ui-react";
+import {Button, Icon, Item, ItemGroup, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {deletePostAction, getAllPostsAction, likePostAction, unLikePostAction} from "../../redux/action/post-action";
 import {Link} from "react-router-dom";
@@ -38,7 +38,7 @@ const PostItem = props => {
                     <Item.Header>{curPost.user.fullname}</Item.Header>
                 </ItemGroup>
                 <div>
-                    <p className="ui positive message" style={{fontSize:'large'}}>
+                    <p className="ui positive message" style={{fontSize: 'large'}}>
                         {curPost.text}
                     </p>
                     <p className="post-date">

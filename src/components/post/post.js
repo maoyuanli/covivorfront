@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from 'react';
 import {commentPostAction, getAllPostsAction, unCommentPostAction} from "../../redux/action/post-action";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
-import {Button, Image, Item, ItemGroup} from "semantic-ui-react";
+import {Button, Item, ItemGroup} from "semantic-ui-react";
 
 const Post = props => {
     useEffect(() => {
@@ -45,14 +45,15 @@ const Post = props => {
                 <Link to='/allposts' className="btn">Back To Posts</Link>
                 <div className="post bg-white p-1 my-1">
                     <ItemGroup>
-                        <Item>
-                            {!props.profile.loading && (<Image src={curPostUserProfile.photoUrl}/>)}
-                        </Item>
-                        <Item><h4>{curPost.user.fullname}</h4></Item>
+                        {!props.profile.loading && (<Item.Image src={curPostUserProfile.photoUrl}/>)}
+                        <Item.Header>{curPost.user.fullname}</Item.Header>
                     </ItemGroup>
                     <div>
-                        <p className="my-1">
+                        <p className="ui positive message" style={{fontSize: 'large'}}>
                             {curPost.text}
+                        </p>
+                        <p className="post-date">
+                            {curPost.date}
                         </p>
                     </div>
                 </div>
@@ -86,14 +87,12 @@ const Post = props => {
                             const commentUserProfile = props.profile.profiles.filter(p => p.user._id === c.user)[0];
                             return (
                                 <div key={c._id} className="post bg-white p-1 my-1">
+                                    <ItemGroup>
+                                        {!props.profile.loading && (<Item.Image src={commentUserProfile.photoUrl}/>)}
+                                        <Item.Header>{c.fullname}</Item.Header>
+                                    </ItemGroup>
                                     <div>
-                                        <a>
-                                            {!props.profile.loading && (<Image src={commentUserProfile.photoUrl}/>)}
-                                            <h4>{c.fullname}</h4>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <p className="my-1">
+                                        <p className="ui info message" style={{fontSize: 'large'}}>
                                             {c.text}
                                         </p>
                                         <p className="post-date">

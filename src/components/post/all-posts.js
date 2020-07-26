@@ -29,10 +29,10 @@ const AllPosts = props => {
         <Fragment>
             {props.post.loading ? <div className="ui active centered inline loader">loading</div> :
                 <Fragment>
-                    <div className="ui icon green message" style={{color:'black'}}>
+                    <div className="ui icon green message" style={{color: 'black'}}>
                         <Icon className="chat"/>
                         <div className="content">
-                            <div className="header" style={{color:'black'}}>
+                            <div className="header" style={{color: 'black'}}>
                                 Welcome to the Surviviors community!
                             </div>
                             <p>Sign up today to participate.</p>
