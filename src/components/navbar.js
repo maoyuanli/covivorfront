@@ -31,7 +31,7 @@ const Navbar = (props) => {
     )
 
     return (
-        <Menu inverted className="navbar bg-dark" color='grey'>
+        <Menu inverted className="navbar bg-light" color='black'>
             <h1>
                 <Link to='/'><Icon className="users"/> CoVivor</Link>
             </h1>

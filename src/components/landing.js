@@ -27,7 +27,7 @@ const Landing = (props) => {
     };
 
     const backgroundImgStyle = {
-        filter: 'brightness(50%)'
+        filter: 'brightness(60%)'
     };
 
     const textStyle = {
