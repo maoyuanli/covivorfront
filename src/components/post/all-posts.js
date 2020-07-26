@@ -29,22 +29,24 @@ const AllPosts = props => {
         <Fragment>
             {props.post.loading ? <div className="ui active centered inline loader">loading</div> :
                 <Fragment>
-                    <h1 className="large text-primary">
-                        Posts
-                    </h1>
-                    <p className="lead"><Icon className="user"/> Welcome to the Surviviors community!</p>
+                    <div className="ui icon green message" style={{color:'black'}}>
+                        <Icon className="chat"/>
+                        <div className="content">
+                            <div className="header" style={{color:'black'}}>
+                                Welcome to the Surviviors community!
+                            </div>
+                            <p>Sign up today to participate.</p>
+                        </div>
+                    </div>
 
                     {props.auth.isAuthenticated &&
                     (<div className="post-form">
-                        <div className="bg-primary p">
-                            <h3>Share...</h3>
-                        </div>
                         <form className="form my-1" onSubmit={handleCreatePost}>
                                   <textarea
                                       name="newPostText"
                                       cols="30"
                                       rows="5"
-                                      placeholder="Create a post"
+                                      placeholder="Share something..."
                                       required
                                       value={newPostText} onChange={e => handleTextOnChange(e)}
                                   />
