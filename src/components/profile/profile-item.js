@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Icon, Item, Message} from "semantic-ui-react";
+import {Icon, Item, Label} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
 const ProfileItem = ({
@@ -13,15 +13,18 @@ const ProfileItem = ({
 
             <Item.Image size='small' src={photoUrl}/>
             <Item.Content>
-
-                <Item.Header as={Link} to={{
-                    pathname: '/profile',
-                    profileProps: {id: _id, photoUrl: photoUrl}
-                }}><a className="ui blue ribbon label">{fullname}</a></Item.Header>
-                <Message
-                    info
-                    header={bio}
-                />
+                <div className="ui raised segment">
+                    <Label
+                        content={fullname}
+                        className='ui blue ribbon label'
+                        style={{fontSize:'medium'}}
+                        as={Link} to={{
+                        pathname: '/profile',
+                        profileProps: {id: _id, photoUrl: photoUrl}
+                    }}
+                    />
+                    <span  style={{fontFamily:'Handlee', fontSize:'large'}}>{bio}</span>
+                </div>
                 <Item.Extra><Icon className='map marker'/>{location}</Item.Extra>
             </Item.Content>
         </Item>
