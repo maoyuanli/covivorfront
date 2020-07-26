@@ -38,7 +38,7 @@ const PostItem = props => {
                     <Item.Header>{curPost.user.fullname}</Item.Header>
                 </ItemGroup>
                 <div>
-                    <p className="ui positive message" style={{fontSize: 'large'}}>
+                    <p className="ui positive message" style={{fontSize: 'large', fontFamily: 'Mulish'}}>
                         {curPost.text}
                     </p>
                     <p className="post-date">

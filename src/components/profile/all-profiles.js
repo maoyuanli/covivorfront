@@ -2,7 +2,7 @@ import React, {Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {getAllProfilesAction} from "../../redux/action/profile-action";
-import {Icon, ItemGroup} from "semantic-ui-react";
+import {Header, ItemGroup, Message} from "semantic-ui-react";
 import ProfileItem from "./profile-item";
 
 const AllProfiles = props => {
@@ -17,10 +17,12 @@ const AllProfiles = props => {
             {props.profile.loading ?
                 <div className="ui active centered inline loader">loading</div> :
                 <Fragment>
-                    <h1 className="large text-primary">Survivors</h1>
-                    <p className="lead">
-                        <Icon className="handshake outline"/> Browse and connect with survivors
-                    </p>
+                    <Header as='h1' color='blue' className="large text-primary"
+                            style={{fontFamily: 'Special Elite'}}>Survivors</Header>
+                    <Message info>
+                        <Message.Header>Connect with each other</Message.Header>
+                        <p>click on name to get more detail</p>
+                    </Message>
                     <ItemGroup>
                         {props.profile.profiles.length > 0 ?
                             (
