@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
-import {Form} from "semantic-ui-react";
+import {Container, Form, Header, Image, Segment} from "semantic-ui-react";
 import {loginAction} from "../redux/action/auth-action";
 
 const Landing = (props) => {
@@ -26,38 +26,46 @@ const Landing = (props) => {
         props.loginAction(email, pass);
     };
 
+    const backgroundImgStyle = {
+        filter: 'brightness(50%)'
+    };
+
+    const textStyle = {
+        position: 'absolute',
+        color: 'white',
+        textAlign: 'center',
+        left: '25%',
+        alignContent: 'center'
+    };
+
+
     return (
-        <section className="landing">
-            <div className="dark-overlay">
-                <div className="landing-inner">
-                    <h1 className="x-large">COVID19 Survivors</h1>
-                    <p className="lead">
-                        Share Experience, Help Each Other, Move On Together
-                    </p>
-                    {/*<div className="buttons">*/}
-                    {/*    <Link to='/register' className="btn btn-primary">Sign Up</Link>*/}
-                    {/*    <Link to='/login' className="btn btn-light">Login</Link>*/}
-                    {/*</div>*/}
-                    <Form onSubmit={handleOnSubmit}>
-                        <Form.Group>
-                            <Form.Input
-                                placeholder='email'
-                                name='email'
-                                value={email}
-                                onChange={handleOnChange}
-                            />
-                            <Form.Input
-                                placeholder='password'
-                                name='pass'
-                                value={pass}
-                                onChange={handleOnChange}
-                            />
-                            <Form.Button color='teal' content='Log In'/>
-                        </Form.Group>
-                    </Form>
-                </div>
-            </div>
-        </section>
+        <Segment nverted textAlign='center' vertical className='masthead'>
+            <Image src="/homepage-background.jpg" fluid style={backgroundImgStyle}/>
+            <Container text style={textStyle}>
+                <Header as='h1' inverted>COVID19 Survivors</Header>
+                <Header as='h2' inverted className="lead">
+                    Share Experience, Help Each Other, Move On Together
+                </Header>
+                <Form inverted onSubmit={handleOnSubmit} style={{display: 'inline-block'}}>
+                    <Form.Group>
+                        <Form.Input
+                            placeholder='email'
+                            name='email'
+                            value={email}
+                            onChange={handleOnChange}
+                        />
+                        <Form.Input
+                            placeholder='password'
+                            name='pass'
+                            value={pass}
+                            onChange={handleOnChange}
+                        />
+                        <Form.Button color='teal' content='Log In'/>
+                    </Form.Group>
+                </Form>
+            </Container>
+        </Segment>
     );
 };
 
