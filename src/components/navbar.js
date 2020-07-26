@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {logoutAction} from "../redux/action/auth-action";
-import {Icon} from "semantic-ui-react";
+import {Icon, Menu} from "semantic-ui-react";
 
 
 const Navbar = (props) => {
@@ -31,7 +31,7 @@ const Navbar = (props) => {
     )
 
     return (
-        <nav className="navbar bg-dark" style={{fontSize: "large", display: "flex"}}>
+        <Menu inverted className="navbar bg-dark" color='grey'>
             <h1>
                 <Link to='/'><Icon className="users"/> CoVivor</Link>
             </h1>
@@ -49,7 +49,7 @@ const Navbar = (props) => {
                 )}
             </ul>
 
-        </nav>
+        </Menu>
     );
 };
 
