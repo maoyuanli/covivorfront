@@ -8,19 +8,16 @@ const ProfileItem = ({
                              user: {fullname}, facebook, instagram, linkedin, location, twitter, youtube, bio, _id, photoUrl
                          }
                      }) => {
-
-    // const randInt = Math.floor(Math.random() * 100);
-    // const hostPhotoURL = `https://randomuser.me/api/portraits/men/${randInt}.jpg`;
     return (
         <Item>
+
             <Item.Image size='small' src={photoUrl}/>
-
-
             <Item.Content>
+
                 <Item.Header as={Link} to={{
                     pathname: '/profile',
                     profileProps: {id: _id, photoUrl: photoUrl}
-                }}>{fullname}</Item.Header>
+                }}><a className="ui blue ribbon label">{fullname}</a></Item.Header>
                 <Message
                     info
                     header={bio}
