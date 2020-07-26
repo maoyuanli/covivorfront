@@ -34,11 +34,8 @@ const PostItem = props => {
         <Fragment>
             <div className="post bg-white p-1 my-1">
                 <ItemGroup>
-                    <Item>
-                        {!props.profile.loading && (<Image src={postUserProfile.photoUrl}/>)}
-
-                    </Item>
-                    <Item><h4>{curPost.user.fullname}</h4></Item>
+                    {!props.profile.loading && (<Item.Image src={postUserProfile.photoUrl}/>)}
+                    <Item.Header>{curPost.user.fullname}</Item.Header>
                 </ItemGroup>
                 <div>
                     <p className="ui positive message" style={{fontSize:'large'}}>
