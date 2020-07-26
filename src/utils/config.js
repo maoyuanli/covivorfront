@@ -6,4 +6,4 @@ const prod = {
     URL_PREFIX: 'https://covivorback.herokuapp.com/api/'
 }
 
-export const config = process.env.NODE_ENV === 'development' ? dev : prod;
+export const config = process.env.NODE_ENV === 'production' ? prod : dev;
