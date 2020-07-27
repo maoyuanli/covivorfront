@@ -5,16 +5,23 @@ import {getProfileAction, upsertProfileAction} from "../../redux/action/profile-
 import PropTypes from 'prop-types';
 import {Link, withRouter} from "react-router-dom";
 
-const UpsertProfile = ({profile, auth, history, upsertProfileAction, getProfileAction}) => {
+const UpsertProfile = ({profile, history, upsertProfileAction, getProfileAction}) => {
+
+    useEffect(() => {
+        getProfileAction();
+    }, [getProfileAction]);
+
+    const loadedProf = profile.profile !== null && profile.profile.profile.length !== 0 ? profile.profile.profile[0] : ''
+
     const [formData, setFormData] = useState({
-        location: '',
-        bio: '',
-        photoUrl: '',
-        youtube: '',
-        twitter: '',
-        facebook: '',
-        linkedin: '',
-        instagram: ''
+        location: loadedProf ? loadedProf.location : '',
+        bio: loadedProf ? loadedProf.bio : '',
+        photoUrl: loadedProf ? loadedProf.photoUrl : '',
+        youtube: loadedProf ? loadedProf.youtube : '',
+        twitter: loadedProf ? loadedProf.twitter : '',
+        facebook: loadedProf ? loadedProf.facebook : '',
+        linkedin: loadedProf ? loadedProf.linkedin : '',
+        instagram: loadedProf ? loadedProf.instagram : ''
     })
 
     const {
@@ -29,22 +36,6 @@ const UpsertProfile = ({profile, auth, history, upsertProfileAction, getProfileA
     } = formData
 
     const [displaySocialInputs, toggleDisplaySocialInputs] = useState(false)
-
-
-    useEffect(() => {
-        getProfileAction();
-        const loadedProf = profile.profile !== null && profile.profile.profile.length !== 0 ? profile.profile.profile[0] : ''
-        setFormData({
-            location: loadedProf ? loadedProf.location : '',
-            bio: loadedProf ? loadedProf.bio : '',
-            photoUrl: loadedProf ? loadedProf.photoUrl : '',
-            youtube: loadedProf ? loadedProf.youtube : '',
-            twitter: loadedProf ? loadedProf.twitter : '',
-            facebook: loadedProf ? loadedProf.facebook : '',
-            linkedin: loadedProf ? loadedProf.linkedin : '',
-            instagram: loadedProf ? loadedProf.instagram : '',
-        })
-    }, [getProfileAction])
 
     const handleOnChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -147,7 +138,6 @@ const UpsertProfile = ({profile, auth, history, upsertProfileAction, getProfileA
 
 UpsertProfile.propTypes = {
     profile: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     upsertProfileAction: PropTypes.func.isRequired,
     getProfileAction: PropTypes.func.isRequired,
@@ -155,7 +145,6 @@ UpsertProfile.propTypes = {
 
 const mapStateToProps = state => ({
     profile: state.profileReducer,
-    auth: state.authReducer
 });
 
 const mapActionToProps = {
