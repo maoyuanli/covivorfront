@@ -1,14 +1,21 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {getProfileAction} from "../redux/action/profile-action";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types'
-import {Button, Icon} from "semantic-ui-react";
+import {Button, Divider, Header, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import {getAllPostsAction} from "../redux/action/post-action";
+import post from "./post/post";
+import PostItem from "./post/post-item";
 
 const Dashboard = props => {
+    const {profile, auth, post ,getProfileAction, getAllPostsAction} = props
+
     useEffect(() => {
-        props.getProfileAction();
-    }, [])
+        getProfileAction();
+        getAllPostsAction();
+    }, [getProfileAction, getAllPostsAction])
+
 
     return (
         props.profile === null || props.profile.loading ?
@@ -24,23 +31,45 @@ const Dashboard = props => {
                     <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile'
                             icon='edit'/>
                 </Fragment>
+
+
+                <Fragment>
+                    {post.posts && auth.user &&
+                    (<div>
+                        <Divider horizontal>
+                            <Header as='h2' style={{fontFamily: 'Baloo Da 2'}}>
+                                <Icon name='slack hash' />
+                                My Posts
+                            </Header>
+                        </Divider>
+                        {
+                            post.posts
+                                .filter(post=>post.user._id === auth.user._id)
+                                .map(post=>(<PostItem key={post._id} postPassed={post} />
+                                    ))}
+                    </div>)}
+                </Fragment>
             </Fragment>
     );
 };
 
 Dashboard.propTypes = {
     getProfileAction: PropTypes.func.isRequired,
+    getAllPostsAction: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    post: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
     profile: state.profileReducer,
-    auth: state.authReducer
+    auth: state.authReducer,
+    post: state.postReducer,
 });
 
 const mapActionToProps = {
-    getProfileAction
+    getProfileAction,
+    getAllPostsAction
 }
 
 export default connect(mapStateToProps, mapActionToProps)(Dashboard);
