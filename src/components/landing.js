@@ -40,7 +40,7 @@ const Landing = (props) => {
 
 
     return (
-        <Segment nverted textAlign='center' vertical className='masthead'>
+        <Segment inverted textAlign='center' vertical className='masthead'>
             <Image src="/homepage-background.jpg" fluid style={backgroundImgStyle}/>
             <Container text style={textStyle}>
                 <Header as='h1' inverted>COVID19 Survivors</Header>
