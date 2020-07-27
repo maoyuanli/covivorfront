@@ -5,34 +5,37 @@ import {getProfileAction} from "../../redux/action/profile-action";
 import {Link, withRouter} from "react-router-dom";
 import {Button, Grid, Header, Icon, Image, Message} from "semantic-ui-react";
 
-const Profile = props => {
+const Profile = ({history, location, getProfileAction, profile, auth}) => {
+
     useEffect(() => {
-        props.getProfileAction();
-    }, [props.getProfileAction])
+        getProfileAction();
+    }, [getProfileAction])
 
     let curProfile = null;
     let profileBelongsCurUser = false
 
-    const propsPassed = props.location.profileProps;
+    const propsPassed = location.profileProps;
     if (!propsPassed) {
-        props.history.push('/allprofiles')
+        history.push('/allprofiles')
     } else {
-        const profilePassed = props.profile.profiles.filter(p => p._id === props.location.profileProps.id)[0];
+        const profilePassed = profile.profiles.filter(p => p._id === location.profileProps.id)[0];
         curProfile = profilePassed;
-        if (props.auth.user) {
-            profileBelongsCurUser = profilePassed.user._id === props.auth.user._id
+        if (auth.user) {
+            profileBelongsCurUser = profilePassed.user._id === auth.user._id
         }
 
         return (
             <Fragment>
-
-
                 <Grid>
                     <Grid.Column width={5}>
                         <Image src={propsPassed.photoUrl}/>
                     </Grid.Column>
                     <Grid.Column width={10}>
                         <Header as='h1'>{curProfile.user.fullname}</Header>
+                        {profileBelongsCurUser && (
+                            <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile'
+                                    icon='edit'/>
+                        )}
                         <Message
                             info
                             header={curProfile.bio}
@@ -57,25 +60,21 @@ const Profile = props => {
                             </Button>)}
                         </div>
 
-                        {profileBelongsCurUser && (
-                            <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile'
-                                    icon='edit'/>
-                        )}
+
                     </Grid.Column>
                 </Grid>
-
-
             </Fragment>
         );
     }
-
     return null
 };
 
 Profile.propTypes = {
     profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
-    getProfileAction: PropTypes.func.isRequired
+    getProfileAction: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

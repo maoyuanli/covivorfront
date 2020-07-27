@@ -5,16 +5,16 @@ import {getAllProfilesAction} from "../../redux/action/profile-action";
 import {Header, ItemGroup, Message} from "semantic-ui-react";
 import ProfileItem from "./profile-item";
 
-const AllProfiles = props => {
+const AllProfiles = ({getAllProfilesAction, profile}) => {
 
     useEffect(() => {
-        props.getAllProfilesAction();
-    }, []);
+        getAllProfilesAction();
+    }, [getAllProfilesAction]);
 
 
     return (
         <Fragment>
-            {props.profile.loading ?
+            {profile.loading ?
                 <div className="ui active centered inline loader">loading</div> :
                 <Fragment>
                     <Header as='h1' color='blue' className="large text-primary"
@@ -24,9 +24,9 @@ const AllProfiles = props => {
                         <p>click on name to get more detail</p>
                     </Message>
                     <ItemGroup>
-                        {props.profile.profiles.length > 0 ?
+                        {profile.profiles.length > 0 ?
                             (
-                                props.profile.profiles.map(p => {
+                                profile.profiles.map(p => {
                                         return <ProfileItem key={p._id} profile={p}/>
                                     }
                                 )
@@ -42,8 +42,6 @@ AllProfiles.propTypes = {
     getAllProfilesAction: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired
 };
-
-AllProfiles.propTypes = {}
 
 const mapStateToProps = (state) => ({
     profile: state.profileReducer

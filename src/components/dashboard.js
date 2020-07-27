@@ -1,15 +1,14 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {getProfileAction} from "../redux/action/profile-action";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types'
 import {Button, Divider, Header, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {getAllPostsAction} from "../redux/action/post-action";
-import post from "./post/post";
 import PostItem from "./post/post-item";
 
 const Dashboard = props => {
-    const {profile, auth, post ,getProfileAction, getAllPostsAction} = props
+    const {profile, auth, post, getProfileAction, getAllPostsAction} = props
 
     useEffect(() => {
         getProfileAction();
@@ -18,7 +17,7 @@ const Dashboard = props => {
 
 
     return (
-        props.profile === null || props.profile.loading ?
+        profile === null || profile.loading ?
             <Fragment>
                 <div className="ui active centered inline loader">loading</div>
             </Fragment> :
@@ -26,7 +25,7 @@ const Dashboard = props => {
                 <h1 className="large text-primary">
                     Dashboard
                 </h1>
-                <p className="lead"><Icon name='user'/> Welcome {props.auth.user && props.auth.user.fullname}</p>
+                <p className="lead"><Icon name='user'/> Welcome {auth.user && auth.user.fullname}</p>
                 <Fragment>
                     <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile'
                             icon='edit'/>
@@ -38,15 +37,15 @@ const Dashboard = props => {
                     (<div>
                         <Divider horizontal>
                             <Header as='h2' style={{fontFamily: 'Baloo Da 2'}}>
-                                <Icon name='slack hash' />
+                                <Icon name='slack hash'/>
                                 My Posts
                             </Header>
                         </Divider>
                         {
                             post.posts
-                                .filter(post=>post.user._id === auth.user._id)
-                                .map(post=>(<PostItem key={post._id} postPassed={post} />
-                                    ))}
+                                .filter(post => post.user._id === auth.user._id)
+                                .map(post => (<PostItem key={post._id} postPassed={post}/>
+                                ))}
                     </div>)}
                 </Fragment>
             </Fragment>

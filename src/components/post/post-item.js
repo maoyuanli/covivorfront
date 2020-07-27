@@ -6,35 +6,36 @@ import {deletePostAction, getAllPostsAction, likePostAction, unLikePostAction} f
 import {Link} from "react-router-dom";
 import {getAllProfilesAction} from "../../redux/action/profile-action";
 
-const PostItem = props => {
-
+const PostItem = ({
+                      auth, profile, postPassed, getAllPostsAction, likePostAction, unLikePostAction, getAllProfilesAction, deletePostAction,
+                  }) => {
     useEffect(() => {
-        props.getAllProfilesAction();
-    }, [props.getAllProfilesAction]);
+        getAllProfilesAction();
+    }, [getAllProfilesAction, deletePostAction, likePostAction, unLikePostAction, getAllPostsAction]);
 
-    const curPost = props.postPassed;
-    const curPostId = props.postPassed._id;
-    const curUserId = props.auth.user ? props.auth.user._id : 0
-    const postUserProfile = props.profile.profiles.filter(p => p.user._id === curPost.user._id)[0];
+    const curPost = postPassed;
+    const curPostId = postPassed._id;
+    const curUserId = auth.user ? auth.user._id : 0
+    const postUserProfile = profile.profiles.filter(p => p.user._id === curPost.user._id)[0];
 
     const handleLikePost = () => {
         if (!curPost.likes.map(like => like.user).includes(curUserId)) {
-            props.likePostAction(curPostId);
+            likePostAction(curPostId);
         } else {
-            props.unLikePostAction(curPostId);
+            unLikePostAction(curPostId);
         }
     };
 
     const handleDeletePost = (e) => {
         e.preventDefault();
-        props.deletePostAction(curPostId);
+        deletePostAction(curPostId);
     };
 
     return (
         <Fragment>
             <div className="post bg-white p-1 my-1">
                 <ItemGroup>
-                    {!props.profile.loading && (<Item.Image src={postUserProfile.photoUrl}/>)}
+                    {!profile.loading && (<Item.Image src={postUserProfile.photoUrl}/>)}
                     <Item.Header>{curPost.user.fullname}</Item.Header>
                 </ItemGroup>
                 <div>
@@ -79,16 +80,16 @@ const PostItem = props => {
 
 PostItem.propTypes = {
     auth: PropTypes.object.isRequired,
-    post: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired,
     getAllPostsAction: PropTypes.func.isRequired,
     likePostAction: PropTypes.func.isRequired,
     unLikePostAction: PropTypes.func.isRequired,
     getAllProfilesAction: PropTypes.func.isRequired,
+    deletePostAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     auth: state.authReducer,
-    post: state.postReducer,
     profile: state.profileReducer
 });
 

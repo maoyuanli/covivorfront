@@ -5,10 +5,10 @@ import {createPostAction, getAllPostsAction} from "../../redux/action/post-actio
 import {Icon} from "semantic-ui-react";
 import PostItem from "./post-item";
 
-const AllPosts = props => {
+const AllPosts = ({auth, post, getAllPostsAction, createPostAction}) => {
     useEffect(() => {
-        props.getAllPostsAction();
-    }, [props.getAllPostsAction])
+        getAllPostsAction();
+    }, [getAllPostsAction])
 
     const [creatPostText, setCreatePostText] = useState({newPostText: ''});
     const {newPostText} = creatPostText;
@@ -21,13 +21,13 @@ const AllPosts = props => {
 
     const handleCreatePost = (e) => {
         e.preventDefault();
-        props.createPostAction(newPostText);
+        createPostAction(newPostText);
         setCreatePostText({newPostText: ''})
     }
 
     return (
         <Fragment>
-            {props.post.loading ? <div className="ui active centered inline loader">loading</div> :
+            {post.loading ? <div className="ui active centered inline loader">loading</div> :
                 <Fragment>
                     <div className="ui icon green message" style={{color: 'black'}}>
                         <Icon className="chat"/>
@@ -39,7 +39,7 @@ const AllPosts = props => {
                         </div>
                     </div>
 
-                    {props.auth.isAuthenticated &&
+                    {auth.isAuthenticated &&
                     (<div className="post-form">
                         <form className="form my-1" onSubmit={handleCreatePost}>
                                   <textarea
@@ -56,7 +56,7 @@ const AllPosts = props => {
                     }
 
                     <div>
-                        {props.post.posts.map(p => (
+                        {post.posts.map(p => (
                             <PostItem key={p._id} postPassed={p}/>
                         ))}
                     </div>
@@ -68,6 +68,7 @@ const AllPosts = props => {
 
 AllPosts.propTypes = {
     post: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
     getAllPostsAction: PropTypes.func.isRequired,
     createPostAction: PropTypes.func.isRequired
 };

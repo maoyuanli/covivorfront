@@ -5,7 +5,7 @@ import {getProfileAction, upsertProfileAction} from "../../redux/action/profile-
 import PropTypes from 'prop-types';
 import {Link, withRouter} from "react-router-dom";
 
-const UpsertProfile = props => {
+const UpsertProfile = ({profile, auth, history, upsertProfileAction, getProfileAction}) => {
     const [formData, setFormData] = useState({
         location: '',
         bio: '',
@@ -32,8 +32,8 @@ const UpsertProfile = props => {
 
 
     useEffect(() => {
-        props.getProfileAction();
-        const loadedProf = props.profile.profile !== null && props.profile.profile.profile.length !== 0 ? props.profile.profile.profile[0] : ''
+        getProfileAction();
+        const loadedProf = profile.profile !== null && profile.profile.profile.length !== 0 ? profile.profile.profile[0] : ''
         setFormData({
             location: loadedProf ? loadedProf.location : '',
             bio: loadedProf ? loadedProf.bio : '',
@@ -44,7 +44,7 @@ const UpsertProfile = props => {
             linkedin: loadedProf ? loadedProf.linkedin : '',
             instagram: loadedProf ? loadedProf.instagram : '',
         })
-    }, [props.profile.loading])
+    }, [getProfileAction])
 
     const handleOnChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -52,7 +52,7 @@ const UpsertProfile = props => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        props.upsertProfileAction(formData, props.history);
+        upsertProfileAction(formData, history);
 
     };
 
@@ -138,8 +138,6 @@ const UpsertProfile = props => {
                         />
                     </div>
                 </Fragment>}
-
-
                 <input type="submit" className="btn btn-primary my-1"/>
                 <Link className="btn btn-light my-1" to='/dashboard'>Go Back</Link>
             </form>
@@ -148,7 +146,11 @@ const UpsertProfile = props => {
 };
 
 UpsertProfile.propTypes = {
+    profile: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
     upsertProfileAction: PropTypes.func.isRequired,
+    getProfileAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -157,7 +159,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionToProps = {
-    upsertProfileAction, getProfileAction
+    upsertProfileAction,
+    getProfileAction
 };
 
 

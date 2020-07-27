@@ -12,8 +12,7 @@ export const getProfileAction = () => async dispatch => {
             payload: res.data
         })
     } catch (e) {
-        dispatch(setAlert('profile loading failed', 'danger'));
-        setTimeout(() => dispatch(removeAlert('danger')), 5000)
+        console.log(e);
     }
 };
 
@@ -25,8 +24,7 @@ export const getAllProfilesAction = () => async dispatch => {
             payload: res.data.profiles
         })
     } catch (e) {
-        dispatch(setAlert('profiles loading failed', 'danger'));
-        setTimeout(() => dispatch(removeAlert('danger')), 5000)
+        console.log(e);
     }
 };
 

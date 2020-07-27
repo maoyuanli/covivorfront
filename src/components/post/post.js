@@ -2,17 +2,18 @@ import React, {Fragment, useEffect, useState} from 'react';
 import {commentPostAction, getAllPostsAction, unCommentPostAction} from "../../redux/action/post-action";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
-import {Button, Item, ItemGroup} from "semantic-ui-react";
+import {Button, Icon, Item, ItemGroup} from "semantic-ui-react";
+import PropTypes from 'prop-types';
 
-const Post = props => {
+const Post = ({post, auth, profile, getAllPostsAction, commentPostAction, unCommentPostAction, location, history}) => {
     useEffect(() => {
-        props.getAllPostsAction()
-    }, [props.getAllPostsAction])
+        getAllPostsAction()
+    }, [getAllPostsAction])
 
 
-    const propsPassed = props.location.postProps;
+    const propsPassed = location.postProps;
 
-    const curUserId = props.auth.user ? props.auth.user._id : 0;
+    const curUserId = auth.user ? auth.user._id : 0;
 
     const [commentText, setCommentTest] = useState({newCommentText: ''});
     const {newCommentText} = commentText;
@@ -25,27 +26,30 @@ const Post = props => {
 
     const handleCreateComment = (e) => {
         e.preventDefault();
-        props.commentPostAction(propsPassed.id, newCommentText);
+        commentPostAction(propsPassed.id, newCommentText);
         setCommentTest({newCommentText: ''})
     }
 
 
     const handleDeleteComment = (e, commentId) => {
         e.preventDefault();
-        props.unCommentPostAction(propsPassed.id, commentId)
+        unCommentPostAction(propsPassed.id, commentId)
     };
 
     if (!propsPassed) {
-        props.history.push('/allposts')
+        history.push('/allposts')
     } else {
-        const curPost = props.post.posts.filter(p => p._id === propsPassed.id)[0]
-        const curPostUserProfile = props.profile.profiles.filter(p => p.user._id === curPost.user._id)[0];
+        const curPost = post.posts.filter(p => p._id === propsPassed.id)[0]
+        const curPostUserProfile = profile.profiles.filter(p => p.user._id === curPost.user._id)[0];
         return (
             <Fragment>
-                <Link to='/allposts' className="btn">Back To Posts</Link>
+                <Button icon labelPosition='left' as={Link} to='/allposts' color='grey'>
+                    Back To Posts
+                    <Icon name='left arrow'/>
+                </Button>
                 <div className="post bg-white p-1 my-1">
                     <ItemGroup>
-                        {!props.profile.loading && (<Item.Image src={curPostUserProfile.photoUrl}/>)}
+                        {!profile.loading && (<Item.Image src={curPostUserProfile.photoUrl}/>)}
                         <Item.Header>{curPost.user.fullname}</Item.Header>
                     </ItemGroup>
                     <div>
@@ -64,9 +68,6 @@ const Post = props => {
                             <h3>Log in to comment</h3>
                         </div>) : (
                             <Fragment>
-                                <div className="bg-primary p">
-                                    <h3>Leave A Comment</h3>
-                                </div>
                                 <form className="form my-1" onSubmit={handleCreateComment}>
                                   <textarea
                                       name="newCommentText"
@@ -84,11 +85,11 @@ const Post = props => {
 
                 <div className="comments">
                     {curPost.comments.map(c => {
-                            const commentUserProfile = props.profile.profiles.filter(p => p.user._id === c.user)[0];
+                            const commentUserProfile = profile.profiles.filter(p => p.user._id === c.user)[0];
                             return (
                                 <div key={c._id} className="post bg-white p-1 my-1">
                                     <ItemGroup>
-                                        {!props.profile.loading && (<Item.Image src={commentUserProfile.photoUrl}/>)}
+                                        {!profile.loading && (<Item.Image src={commentUserProfile.photoUrl}/>)}
                                         <Item.Header>{c.fullname}</Item.Header>
                                     </ItemGroup>
                                     <div>
@@ -111,11 +112,18 @@ const Post = props => {
             </Fragment>
         );
     }
-
     return null;
 };
 
-Post.propTypes = {};
+Post.propTypes = {
+    post: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    getAllPostsAction: PropTypes.func.isRequired,
+    commentPostAction: PropTypes.func.isRequired,
+    unCommentPostAction: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
     post: state.postReducer,
