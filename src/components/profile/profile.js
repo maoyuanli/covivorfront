@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {getProfileAction} from "../../redux/action/profile-action";
 import {Link, withRouter} from "react-router-dom";
-import {Button, Divider, Form, Grid, Header, Icon, Image, Label, Message, Segment} from "semantic-ui-react";
+import {Button, Divider, Form, Grid, Header, Icon, Image, Message} from "semantic-ui-react";
 import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 import GoogleMapComponent from "./google-map-component";
 
@@ -33,13 +33,13 @@ const Profile = ({history, location, getProfileAction, profile, auth}) => {
         })
         .catch(error => console.error('Error', error));
 
-    const{lat, lng, locLatLngLoading} = locLatLng;
+    const {lat, lng, locLatLngLoading} = locLatLng;
     return (
         <Fragment>
             <Grid>
                 <Grid.Column width={5}>
                     <Image src={curProfile.photoUrl}/>
-                    <Divider />
+                    <Divider/>
                     <Button floated='right' icon labelPosition='left' as={Link} to='/allprofiles' color='grey'>
                         Back To Profile List
                         <Icon name='left arrow'/>
@@ -77,12 +77,12 @@ const Profile = ({history, location, getProfileAction, profile, auth}) => {
                         {/*<Header as='h3' content='Reported Location of Exposure' />*/}
                         <Divider horizontal>
                             <Header as='h4'>
-                                 Reported Location of Exposure
+                                Reported Location of Exposure
                             </Header>
                         </Divider>
                         <Form>{!locLatLngLoading && (<GoogleMapComponent lat={lat} lng={lng}/>)}</Form>
                         <Message attached='bottom' warning>
-                            <Icon name='map marker alternate' />
+                            <Icon name='map marker alternate'/>
                             {curProfile.location}
                         </Message>
                     </div>

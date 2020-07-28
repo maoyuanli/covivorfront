@@ -21,7 +21,6 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
                             style={{fontFamily: 'Special Elite'}}>Survivors</Header>
                     <Message info>
                         <Message.Header>Connect with each other</Message.Header>
-                        <p>click on name to get more detail</p>
                     </Message>
                     <ItemGroup>
                         {profile.profiles.length > 0 ?

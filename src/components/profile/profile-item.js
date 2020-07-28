@@ -9,7 +9,12 @@ const ProfileItem = ({
                          }
                      }) => {
     return (
-        <Item>
+        <Item
+            as={Link} to={{
+            pathname: '/profile',
+            profileProps: {id: _id, photoUrl: photoUrl, profileLocation: location}
+        }}
+        >
 
             <Item.Image size='small' src={photoUrl}/>
             <Item.Content>
@@ -18,10 +23,7 @@ const ProfileItem = ({
                         content={fullname}
                         className='ui blue ribbon label'
                         style={{fontSize: 'medium'}}
-                        as={Link} to={{
-                        pathname: '/profile',
-                        profileProps: {id: _id, photoUrl: photoUrl, profileLocation: location}
-                    }}
+
                     />
                     <span style={{fontFamily: 'Itim', fontSize: '20px'}}>{bio}</span>
                 </div>
