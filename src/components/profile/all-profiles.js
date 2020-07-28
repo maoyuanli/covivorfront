@@ -13,7 +13,7 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
     }, [getAllProfilesAction]);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const profilesPerPage = 2;
+    const profilesPerPage = 5;
 
     const indexOfLastProfileOnPage = currentPage * profilesPerPage;
     const indexOfFirstProfileOnPage = indexOfLastProfileOnPage - profilesPerPage;
