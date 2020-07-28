@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {connect} from "react-redux";
-import {Icon, Image} from "semantic-ui-react";
+import {Form, Icon, Image} from "semantic-ui-react";
 import {getProfileAction, upsertProfileAction} from "../../redux/action/profile-action";
 import PropTypes from 'prop-types';
 import {Link, withRouter} from "react-router-dom";
@@ -57,30 +57,28 @@ const UpsertProfile = ({profile, history, upsertProfileAction, getProfileAction}
                 profile stand out
             </p>
             <Image src={photoUrl} size='small'/>
-            <small>* = required field</small>
-            <form className="form" onSubmit={handleOnSubmit}>
-                <div className="form-group">
-                    <input type="text" placeholder="* Location" name="location" required
-                           value={location} onChange={e => handleOnChange(e)}
-                    />
-                    <small className="form-text"
-                    >City & Province suggested (eg. Toronto, ON) *</small
-                    >
-                </div>
-                <div className="form-group">
-                    <textarea placeholder="* A short bio of yourself" name="bio" required
-                              value={bio} onChange={e => handleOnChange(e)}
-                    />
-                    <small className="form-text">Tell us a little about yourself *</small>
-                </div>
-                <div className="form-group">
+            <Form className="form" onSubmit={handleOnSubmit}>
+                <Form.Field>
+                    <label>Profile Photo Link</label>
                     <input type="text" placeholder="Profile Photo Url Link" name="photoUrl" required
                            value={photoUrl} onChange={e => handleOnChange(e)}
                     />
                     <small className="form-text"
                     >currently supports photo url, photo upload on the way</small
                     >
-                </div>
+                </Form.Field>
+                <Form.Field>
+                    <label>Location of Exposure</label>
+                    <input type="text" placeholder="* Location" name="location" required
+                           value={location} onChange={e => handleOnChange(e)}
+                    />
+                </Form.Field>
+                <Form.Field>
+                    <label>Bio</label>
+                    <textarea placeholder="* A short bio of yourself" name="bio" required
+                              value={bio} onChange={e => handleOnChange(e)}
+                    />
+                </Form.Field>
                 <div className="my-2">
                     <div className="my-2">
                         <button type="button" className="ui primary button"
@@ -90,7 +88,6 @@ const UpsertProfile = ({profile, history, upsertProfileAction, getProfileAction}
                         {' '}
                         <span>Optional</span>
                     </div>
-                    <span>Optional</span>
                 </div>
                 {displaySocialInputs &&
                 <Fragment>
@@ -131,7 +128,7 @@ const UpsertProfile = ({profile, history, upsertProfileAction, getProfileAction}
                 </Fragment>}
                 <input type="submit" className="btn btn-primary my-1"/>
                 <Link className="btn btn-light my-1" to='/dashboard'>Go Back</Link>
-            </form>
+            </Form>
         </Fragment>
     );
 };

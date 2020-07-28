@@ -3,7 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import {connect} from 'react-redux';
 import {loginAction} from "../../redux/action/auth-action";
 import PropTypes from "prop-types";
-import {Icon} from "semantic-ui-react";
+import {Divider, Form, Icon} from "semantic-ui-react";
 
 const Login = (props) => {
 
@@ -31,13 +31,15 @@ const Login = (props) => {
         <Fragment>
             <h1 className="large text-primary">Sign In</h1>
             <p className="lead"><Icon name='user'/> Log into your account</p>
-            <form className="form" onSubmit={handleOnSubmit}>
-                <div className="form-group">
+            <Form onSubmit={handleOnSubmit}>
+                <Form.Field>
+                    <label>Email Address</label>
                     <input type="email" placeholder="Email Address" name="email"
                            value={email} onChange={e => handleOnChange(e)}
                     />
-                </div>
-                <div className="form-group">
+                </Form.Field>
+                <Form.Field className="form-group">
+                    <label>Password</label>
                     <input
                         type="password"
                         placeholder="Password"
@@ -46,10 +48,11 @@ const Login = (props) => {
                         required
                         value={pass} onChange={e => handleOnChange(e)}
                     />
-                </div>
+                </Form.Field>
                 <input type="submit" className="btn btn-primary" value="Login"/>
-            </form>
-            <p className="my-1">
+            </Form>
+            <Divider/>
+            <p attached='bottom'>
                 Don't have an account? <Link to='/register'>Register</Link>
             </p>
         </Fragment>
