@@ -13,7 +13,7 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
     }, [getAllProfilesAction]);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const profilesPerPage = 3;
+    const profilesPerPage = 2;
 
     const indexOfLastProfileOnPage = currentPage * profilesPerPage;
     const indexOfFirstProfileOnPage = indexOfLastProfileOnPage - profilesPerPage;
@@ -44,7 +44,24 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
                             <h3>No Profiles Found</h3>}
                     </ItemGroup>
                 </Fragment>}
-                <Pagination itemsPerPage={profilesPerPage} totalItems={profile.profiles.length}  paginate={paginate} />
+            <nav>
+                <ul className="pagination">
+                    <li className="page-item">
+                        <a className="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span className="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <Pagination itemsPerPage={profilesPerPage} totalItems={profile.profiles.length}
+                                paginate={paginate}/>
+                    <li className="page-item">
+                        <a className="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span className="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </Fragment>
     );
 };
