@@ -12,18 +12,18 @@ function Pagination({itemsPerPage, totalItems, paginate, onClickNext, onClickPre
             <nav style={{display: 'inline-block'}}>
                 <ul className="pagination">
                     <li className="page-item">
-                        <a onClick={onClickPrev} className="page-link" href="#" aria-label="Previous">
+                        <a onClick={onClickPrev} className="page-link" href="#a" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span className="sr-only">Previous</span>
                         </a>
                     </li>
                     {pageNumbers.map(number => (
                         <li key={number} className="page-item">
-                            <a onClick={() => paginate(number)} href="#" className="page-link">{number}</a>
+                            <a onClick={() => paginate(number)} href="#a" className="page-link">{number}</a>
                         </li>
                     ))}
                     <li className="page-item">
-                        <a onClick={onClickNext} className="page-link" href="#" aria-label="Next">
+                        <a onClick={onClickNext} className="page-link" href="#a" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span className="sr-only">Next</span>
                         </a>

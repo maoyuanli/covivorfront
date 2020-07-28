@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {createPostAction, getAllPostsAction} from "../../redux/action/post-action";
 import {Icon} from "semantic-ui-react";
 import PostItem from "./post-item";
+import Pagination from "../../utils/pagination";
 
 const AllPosts = ({auth, post, getAllPostsAction, createPostAction}) => {
     useEffect(() => {
@@ -24,6 +25,26 @@ const AllPosts = ({auth, post, getAllPostsAction, createPostAction}) => {
         createPostAction(newPostText);
         setCreatePostText({newPostText: ''})
     }
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
+
+    const indexOfLastItemOnPage = currentPage * itemsPerPage;
+    const indexOfFirstItemOnPage = indexOfLastItemOnPage - itemsPerPage;
+
+    const paginate = (page) => {
+        setCurrentPage(page)
+    };
+
+    const handleClickNext = () => {
+        if (currentPage < Math.ceil(post.posts.length / itemsPerPage))
+            setCurrentPage(currentPage + 1)
+    };
+
+    const handleClickPrev = () => {
+        if (currentPage > 1)
+            setCurrentPage(currentPage - 1)
+    };
 
     return (
         <Fragment>
@@ -56,12 +77,14 @@ const AllPosts = ({auth, post, getAllPostsAction, createPostAction}) => {
                     }
 
                     <div>
-                        {post.posts.map(p => (
+                        {post.posts.slice(indexOfFirstItemOnPage,indexOfLastItemOnPage).map(p => (
                             <PostItem key={p._id} postPassed={p}/>
                         ))}
                     </div>
                 </Fragment>
             }
+            <Pagination itemsPerPage={itemsPerPage} totalItems={post.posts.length}
+                        paginate={paginate} onClickNext={handleClickNext} onClickPrev={handleClickPrev}/>
         </Fragment>
     );
 };

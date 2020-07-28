@@ -13,17 +13,17 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
     }, [getAllProfilesAction]);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const profilesPerPage = 5;
+    const itemsPerPage = 5;
 
-    const indexOfLastProfileOnPage = currentPage * profilesPerPage;
-    const indexOfFirstProfileOnPage = indexOfLastProfileOnPage - profilesPerPage;
+    const indexOfLastItemOnPage = currentPage * itemsPerPage;
+    const indexOfFirstItemOnPage = indexOfLastItemOnPage - itemsPerPage;
 
     const paginate = (page) => {
         setCurrentPage(page)
     };
 
     const handleClickNext = () => {
-        if (currentPage < Math.ceil(profile.profiles.length / profilesPerPage))
+        if (currentPage < Math.ceil(profile.profiles.length / itemsPerPage))
             setCurrentPage(currentPage + 1)
     };
 
@@ -45,7 +45,7 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
                     <ItemGroup>
                         {profile.profiles.length > 0 ?
                             (
-                                profile.profiles.slice(indexOfFirstProfileOnPage, indexOfLastProfileOnPage).map(p => {
+                                profile.profiles.slice(indexOfFirstItemOnPage, indexOfLastItemOnPage).map(p => {
                                         return <ProfileItem key={p._id} profile={p}/>
                                     }
                                 )
@@ -53,7 +53,7 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
                             <h3>No Profiles Found</h3>}
                     </ItemGroup>
                 </Fragment>}
-            <Pagination itemsPerPage={profilesPerPage} totalItems={profile.profiles.length}
+            <Pagination itemsPerPage={itemsPerPage} totalItems={profile.profiles.length}
                         paginate={paginate} onClickNext={handleClickNext} onClickPrev={handleClickPrev}/>
 
         </Fragment>
