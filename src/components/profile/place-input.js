@@ -4,11 +4,11 @@ import PlacesAutoComplete, {geocodeByAddress, getLatLng} from 'react-places-auto
 class PlaceInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { address: '' };
+        this.state = {address: ''};
     }
 
     handleChange = address => {
-        this.setState({ address });
+        this.setState({address});
     };
 
     handleSelect = address => {
@@ -25,7 +25,7 @@ class PlaceInput extends React.Component {
                 onChange={this.handleChange}
                 onSelect={this.handleSelect}
             >
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
                     <div>
                         <input
                             {...getInputProps({
@@ -41,8 +41,8 @@ class PlaceInput extends React.Component {
                                     : 'suggestion-item';
                                 // inline style for demonstration purpose
                                 const style = suggestion.active
-                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                    ? {backgroundColor: '#fafafa', cursor: 'pointer'}
+                                    : {backgroundColor: '#ffffff', cursor: 'pointer'};
                                 return (
                                     <div
                                         {...getSuggestionItemProps(suggestion, {

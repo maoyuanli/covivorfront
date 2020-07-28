@@ -17,56 +17,55 @@ const Profile = ({history, location, getProfileAction, profile, auth}) => {
     const propsPassed = location.profileProps;
     if (!propsPassed) {
         history.push('/allprofiles')
-    } else {
-        const profilePassed = profile.profiles.filter(p => p._id === location.profileProps.id)[0];
-        curProfile = profilePassed;
-        if (auth.user) {
-            profileBelongsCurUser = profilePassed.user._id === auth.user._id
-        }
-
-        return (
-            <Fragment>
-                <Grid>
-                    <Grid.Column width={5}>
-                        <Image src={propsPassed.photoUrl}/>
-                    </Grid.Column>
-                    <Grid.Column width={10}>
-                        <Header as='h1'>{curProfile.user.fullname}</Header>
-                        {profileBelongsCurUser && (
-                            <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile'
-                                    icon='edit'/>
-                        )}
-                        <Message
-                            info
-                            header={curProfile.bio}
-                            content={curProfile.location}
-                        />
-
-                        <div>
-                            {curProfile.facebook && (<Button color='facebook'>
-                                <Icon name='facebook'/> {curProfile.facebook}
-                            </Button>)}
-                            {curProfile.twitter && (<Button color='twitter'>
-                                <Icon name='twitter'/> {curProfile.twitter}
-                            </Button>)}
-                            {curProfile.instagram && (<Button color='instagram'>
-                                <Icon name='instagram'/> {curProfile.instagram}
-                            </Button>)}
-                            {curProfile.linkedin && (<Button color='linkedin'>
-                                <Icon name='linkedin'/> {curProfile.linkedin}
-                            </Button>)}
-                            {curProfile.youtube && (<Button color='youtube'>
-                                <Icon name='youtube'/> {curProfile.youtube}
-                            </Button>)}
-                        </div>
-
-
-                    </Grid.Column>
-                </Grid>
-            </Fragment>
-        );
     }
-    return null
+    const profilePassed = profile.profiles.filter(p => p._id === location.profileProps.id)[0];
+    curProfile = profilePassed;
+    if (auth.user) {
+        profileBelongsCurUser = profilePassed.user._id === auth.user._id
+    }
+
+    return (
+        <Fragment>
+            <Grid>
+                <Grid.Column width={5}>
+                    <Image src={curProfile.photoUrl}/>
+                </Grid.Column>
+                <Grid.Column width={10}>
+                    <Header as='h1'>{curProfile.user.fullname}</Header>
+                    {profileBelongsCurUser && (
+                        <Button as={Link} to='/upsert-profile' className='ui primary button' content='Edit Profile'
+                                icon='edit'/>
+                    )}
+                    <Message
+                        info
+                        header={curProfile.bio}
+                        content={curProfile.location}
+                    />
+                    <div>
+                        {curProfile.facebook && (<Button color='facebook'>
+                            <Icon name='facebook'/> {curProfile.facebook}
+                        </Button>)}
+                        {curProfile.twitter && (<Button color='twitter'>
+                            <Icon name='twitter'/> {curProfile.twitter}
+                        </Button>)}
+                        {curProfile.instagram && (<Button color='instagram'>
+                            <Icon name='instagram'/> {curProfile.instagram}
+                        </Button>)}
+                        {curProfile.linkedin && (<Button color='linkedin'>
+                            <Icon name='linkedin'/> {curProfile.linkedin}
+                        </Button>)}
+                        {curProfile.youtube && (<Button color='youtube'>
+                            <Icon name='youtube'/> {curProfile.youtube}
+                        </Button>)}
+                    </div>
+                </Grid.Column>
+            </Grid>
+            <Button floated='right' icon labelPosition='left' as={Link} to='/allprofiles' color='grey'>
+                Back To Profile List
+                <Icon name='left arrow'/>
+            </Button>
+        </Fragment>
+    );
 };
 
 Profile.propTypes = {
