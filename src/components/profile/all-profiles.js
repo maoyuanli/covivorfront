@@ -1,9 +1,10 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {getAllProfilesAction} from "../../redux/action/profile-action";
 import {Header, ItemGroup, Message} from "semantic-ui-react";
 import ProfileItem from "./profile-item";
+import Pagination from "../../utils/pagination";
 
 const AllProfiles = ({getAllProfilesAction, profile}) => {
 
@@ -11,6 +12,16 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
         getAllProfilesAction();
     }, [getAllProfilesAction]);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const profilesPerPage = 3;
+
+    const indexOfLastProfileOnPage = currentPage * profilesPerPage;
+    const indexOfFirstProfileOnPage = indexOfLastProfileOnPage - profilesPerPage;
+    console.log(indexOfFirstProfileOnPage, indexOfLastProfileOnPage)
+
+    const paginate = (page) => {
+        setCurrentPage(page)
+    };
 
     return (
         <Fragment>
@@ -25,7 +36,7 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
                     <ItemGroup>
                         {profile.profiles.length > 0 ?
                             (
-                                profile.profiles.map(p => {
+                                profile.profiles.slice(indexOfFirstProfileOnPage, indexOfLastProfileOnPage).map(p => {
                                         return <ProfileItem key={p._id} profile={p}/>
                                     }
                                 )
@@ -33,6 +44,7 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
                             <h3>No Profiles Found</h3>}
                     </ItemGroup>
                 </Fragment>}
+                <Pagination itemsPerPage={profilesPerPage} totalItems={profile.profiles.length}  paginate={paginate} />
         </Fragment>
     );
 };
