@@ -20,12 +20,12 @@ const ProfileItem = ({
                         style={{fontSize: 'medium'}}
                         as={Link} to={{
                         pathname: '/profile',
-                        profileProps: {id: _id, photoUrl: photoUrl}
+                        profileProps: {id: _id, photoUrl: photoUrl, profileLocation: location}
                     }}
                     />
                     <span style={{fontFamily: 'Itim', fontSize: '20px'}}>{bio}</span>
                 </div>
-                <Item.Extra><Icon className='map marker'/>{location}</Item.Extra>
+                <Item.Extra>Reported Exposure at <Icon className='map marker'/>{location}</Item.Extra>
             </Item.Content>
         </Item>
     );

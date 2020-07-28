@@ -1,9 +1,11 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {getProfileAction} from "../../redux/action/profile-action";
 import {Link, withRouter} from "react-router-dom";
-import {Button, Grid, Header, Icon, Image, Message} from "semantic-ui-react";
+import {Button, Divider, Form, Grid, Header, Icon, Image, Label, Message, Segment} from "semantic-ui-react";
+import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import GoogleMapComponent from "./google-map-component";
 
 const Profile = ({history, location, getProfileAction, profile, auth}) => {
 
@@ -23,12 +25,25 @@ const Profile = ({history, location, getProfileAction, profile, auth}) => {
     if (auth.user) {
         profileBelongsCurUser = profilePassed.user._id === auth.user._id
     }
+    const [locLatLng, setLocLatLng] = useState({lat: 0, lng: 0, locLatLngLoading: true})
+    geocodeByAddress(propsPassed.profileLocation)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => {
+            setLocLatLng({lat: latLng.lat, lng: latLng.lng, locLatLngLoading: false});
+        })
+        .catch(error => console.error('Error', error));
 
+    const{lat, lng, locLatLngLoading} = locLatLng;
     return (
         <Fragment>
             <Grid>
                 <Grid.Column width={5}>
                     <Image src={curProfile.photoUrl}/>
+                    <Divider />
+                    <Button floated='right' icon labelPosition='left' as={Link} to='/allprofiles' color='grey'>
+                        Back To Profile List
+                        <Icon name='left arrow'/>
+                    </Button>
                 </Grid.Column>
                 <Grid.Column width={10}>
                     <Header as='h1'>{curProfile.user.fullname}</Header>
@@ -39,8 +54,8 @@ const Profile = ({history, location, getProfileAction, profile, auth}) => {
                     <Message
                         info
                         header={curProfile.bio}
-                        content={curProfile.location}
                     />
+
                     <div>
                         {curProfile.facebook && (<Button color='facebook'>
                             <Icon name='facebook'/> {curProfile.facebook}
@@ -58,12 +73,24 @@ const Profile = ({history, location, getProfileAction, profile, auth}) => {
                             <Icon name='youtube'/> {curProfile.youtube}
                         </Button>)}
                     </div>
+                    <div>
+                        {/*<Header as='h3' content='Reported Location of Exposure' />*/}
+                        <Divider horizontal>
+                            <Header as='h4'>
+                                 Reported Location of Exposure
+                            </Header>
+                        </Divider>
+                        <Form>{!locLatLngLoading && (<GoogleMapComponent lat={lat} lng={lng}/>)}</Form>
+                        <Message attached='bottom' warning>
+                            <Icon name='map marker alternate' />
+                            {curProfile.location}
+                        </Message>
+                    </div>
+
+
                 </Grid.Column>
             </Grid>
-            <Button floated='right' icon labelPosition='left' as={Link} to='/allprofiles' color='grey'>
-                Back To Profile List
-                <Icon name='left arrow'/>
-            </Button>
+
         </Fragment>
     );
 };
