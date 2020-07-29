@@ -1,5 +1,5 @@
 
-export const config = () => {
+export const configProvider = () => {
     if(process.env.NODE_ENV === 'production'){
         return {
             URL_PREFIX: 'https://covivorback.herokuapp.com/api/',
@@ -13,3 +13,5 @@ export const config = () => {
         }
     }
 }
+
+export const config = configProvider();
