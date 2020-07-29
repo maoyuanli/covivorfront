@@ -65,7 +65,9 @@ const AllPosts = ({auth, post, getAllPostsAction, createPostAction}) => {
                         <form className="form my-1" onSubmit={handleCreatePost}>
                                   <textarea
                                       name="newPostText"
+                                      // @ts-ignore
                                       cols="30"
+                                      // @ts-ignore
                                       rows="5"
                                       placeholder="Share something..."
                                       required

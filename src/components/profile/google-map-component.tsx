@@ -16,6 +16,7 @@ const GoogleMapComponent = ({lat, lng}) => {
                     defaultZoom={zoom}
                 >
                     <Marker
+                        // @ts-ignore
                         lat={lat}
                         lng={lng}
                     />

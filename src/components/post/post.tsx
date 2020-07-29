@@ -41,11 +41,12 @@ const Post = ({post, auth, profile, getAllPostsAction, commentPostAction, unComm
     }
     const curPost = post.posts.filter(p => p._id === propsPassed.id)[0]
     const curPostUserProfile = profile.profiles.filter(p => p.user._id === curPost.user._id)[0];
+
     return (
         <Fragment>
             <Button icon labelPosition='left' as={Link} to='/allposts' color='grey'>
                 Back To Posts
-                <Icon name='left arrow'/>
+                <Icon className='left arrow'/>
             </Button>
             <div className="post bg-white p-1 my-1">
                 <ItemGroup>
@@ -71,7 +72,9 @@ const Post = ({post, auth, profile, getAllPostsAction, commentPostAction, unComm
                             <form className="form my-1" onSubmit={handleCreateComment}>
                                   <textarea
                                       name="newCommentText"
+                                      // @ts-ignore
                                       cols="30"
+                                      // @ts-ignore
                                       rows="5"
                                       placeholder="Type your comment"
                                       required

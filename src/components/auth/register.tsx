@@ -39,6 +39,7 @@ const Register = (props) => {
         return <Redirect to='/dashboard'/>
     }
 
+
     return (
         <Fragment>
             <h1 className="large text-primary">Sign Up</h1>
@@ -59,7 +60,8 @@ const Register = (props) => {
                         type="password"
                         placeholder="Password"
                         name="pass1"
-                        minLength="6"
+                        // @ts-ignore
+                        minLength='6'
                         required
                         value={pass1} onChange={e => handleOnChange(e)}
                     />
@@ -69,6 +71,7 @@ const Register = (props) => {
                         type="password"
                         placeholder="Confirm Password"
                         name="pass2"
+                        // @ts-ignore
                         minLength="6"
                         required
                         value={pass2} onChange={e => handleOnChange(e)}

@@ -27,6 +27,7 @@ const Login = (props) => {
         return <Redirect to='/dashboard'/>
     }
 
+
     return (
         <Fragment>
             <h1 className="large text-primary">Sign In</h1>
@@ -44,6 +45,7 @@ const Login = (props) => {
                         type="password"
                         placeholder="Password"
                         name="pass"
+                        // @ts-ignore
                         minLength="6"
                         required
                         value={pass} onChange={e => handleOnChange(e)}

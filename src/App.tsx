@@ -25,6 +25,7 @@ if (localStorage.token) {
 
 export const App = () => {
     useEffect(() => {
+        // @ts-ignore
         store.dispatch(loadUserAction());
     }, [])
     return (

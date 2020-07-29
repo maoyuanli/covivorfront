@@ -21,6 +21,7 @@ class PlaceInput extends React.Component {
     render() {
         return (
             <PlacesAutoComplete
+                // @ts-ignore
                 value={this.state.address}
                 onChange={this.handleChange}
                 onSelect={this.handleSelect}

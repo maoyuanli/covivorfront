@@ -42,7 +42,7 @@ const Profile = ({history, location, getProfileAction, profile, auth}) => {
                     <Divider/>
                     <Button floated='right' icon labelPosition='left' as={Link} to='/allprofiles' color='grey'>
                         Back To Profile List
-                        <Icon name='left arrow'/>
+                        <Icon className='left arrow'/>
                     </Button>
                 </Grid.Column>
                 <Grid.Column width={10}>
