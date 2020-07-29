@@ -1,6 +1,7 @@
 import React from 'react';
 import {Icon, Segment} from "semantic-ui-react";
 import GoogleMapReact from 'google-map-react';
+import {config} from "../../utils/config";
 
 const Marker = () => <Icon name='marker' size='big' color='red'/>
 
@@ -10,7 +11,7 @@ const GoogleMapComponent = ({lat, lng}) => {
         <Segment attached='bottom' style={{padding: 0}}>
             <div style={{height: '300px', width: '100%'}}>
                 <GoogleMapReact
-                    bootstrapURLKeys={{key: 'AIzaSyC5I_ZS1lImvs5KPtr5dHtK0CwdID9YuLQ'}}
+                    bootstrapURLKeys={{key: config.GOOGLE_MAP_API_KEY}}
                     defaultCenter={{lat, lng}}
                     defaultZoom={zoom}
                 >
