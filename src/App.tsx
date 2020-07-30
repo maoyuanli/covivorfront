@@ -1,23 +1,23 @@
 import React, {Fragment, useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
-import Navbar from "./components/navbar";
+import Navbar from "./components/common/navbar";
 import Landing from "./components/landing";
 import Register from "./components/auth/register";
 import Login from "./components/auth/login";
-import {Provider} from 'react-redux';
 import store from './redux/store';
-import Alert from "./components/alert";
+import Alert from "./components/common/alert";
 import setAuthToken from "./utils/set-auth-token";
 import {loadUserAction} from "./redux/action/auth-action";
 import Dashboard from "./components/dashboard";
-import PrivateRoute from "./components/private-route";
+import PrivateRoute from "./components/common/private-route";
 import UpsertProfile from "./components/profile/upsert-profile";
 import AllProfiles from "./components/profile/all-profiles";
 import Profile from "./components/profile/profile";
 import AllPosts from "./components/post/all-posts";
 import Post from "./components/post/post";
 import ScrollToTop from "./utils/scroll-to-top";
+import Root from './root';
 
 if (localStorage.token) {
     setAuthToken(localStorage.token)
@@ -29,7 +29,7 @@ export const App = () => {
         store.dispatch(loadUserAction());
     }, [])
     return (
-        <Provider store={store}>
+        <Root>
             <BrowserRouter>
                 <ScrollToTop>
                     <Fragment>
@@ -51,7 +51,7 @@ export const App = () => {
                     </Fragment>
                 </ScrollToTop>
             </BrowserRouter>
-        </Provider>
+        </Root>
     );
 }
 
