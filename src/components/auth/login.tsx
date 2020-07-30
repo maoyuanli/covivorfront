@@ -33,7 +33,6 @@ const Login = (props) => {
 
     return (
         <Fragment>
-            <h1 className="large text-primary">Sign In</h1>
             <p className="lead"><Icon name='user'/> Log into your account</p>
             <Form onSubmit={handleOnSubmit}>
                 <Form.Field>
