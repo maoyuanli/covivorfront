@@ -2,15 +2,17 @@ import React from 'react';
 import PlacesAutoComplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 
 class PlaceInput extends React.Component {
+    // @ts-ignore
     constructor(props) {
         super(props);
         this.state = {address: ''};
     }
 
+// @ts-ignore
     handleChange = address => {
         this.setState({address});
     };
-
+// @ts-ignore
     handleSelect = address => {
         geocodeByAddress(address)
             .then(results => getLatLng(results[0]))

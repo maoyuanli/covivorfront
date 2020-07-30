@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import {registerAction} from "../../redux/action/auth-action";
 import {Icon} from "semantic-ui-react";
 
+// @ts-ignore
 const Register = (props) => {
 
     const [formData, setFormData] = useState({
@@ -16,11 +17,11 @@ const Register = (props) => {
     });
 
     const {name, email, pass1, pass2} = formData;
-
+// @ts-ignore
     const handleOnChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
     };
-
+// @ts-ignore
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         let alertType = '';
@@ -92,7 +93,7 @@ Register.propTypes = {
     registerAction: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
 }
-
+// @ts-ignore
 const mapStateToProps = state => ({
     isAuthenticated: state.authReducer.isAuthenticated
 });

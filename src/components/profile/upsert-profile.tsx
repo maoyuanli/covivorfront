@@ -4,7 +4,7 @@ import {Form, Icon, Image} from "semantic-ui-react";
 import {getProfileAction, upsertProfileAction} from "../../redux/action/profile-action";
 import PropTypes from 'prop-types';
 import {Link, withRouter} from "react-router-dom";
-
+// @ts-ignore
 const UpsertProfile = ({profile, history, upsertProfileAction, getProfileAction}) => {
 
     useEffect(() => {
@@ -36,11 +36,11 @@ const UpsertProfile = ({profile, history, upsertProfileAction, getProfileAction}
     } = formData
 
     const [displaySocialInputs, toggleDisplaySocialInputs] = useState(false)
-
+// @ts-ignore
     const handleOnChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
     };
-
+// @ts-ignore
     const handleOnSubmit = (e) => {
         e.preventDefault();
         upsertProfileAction(formData, history);
@@ -139,7 +139,7 @@ UpsertProfile.propTypes = {
     upsertProfileAction: PropTypes.func.isRequired,
     getProfileAction: PropTypes.func.isRequired,
 };
-
+// @ts-ignore
 const mapStateToProps = state => ({
     profile: state.profileReducer,
 });
@@ -148,6 +148,5 @@ const mapActionToProps = {
     upsertProfileAction,
     getProfileAction
 };
-
-
+// @ts-ignore
 export default connect(mapStateToProps, mapActionToProps)(withRouter(UpsertProfile));

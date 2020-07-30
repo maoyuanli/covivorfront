@@ -1,5 +1,6 @@
 import React from 'react';
 
+// @ts-ignore
 function Pagination({itemsPerPage, totalItems, paginate, onClickNext, onClickPrev}) {
     const pageNumbers = [];
 

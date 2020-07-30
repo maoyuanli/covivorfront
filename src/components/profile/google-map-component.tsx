@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react';
 import {config} from "../../utils/config";
 
 const Marker = () => <Icon name='marker' size='big' color='red'/>
-
+// @ts-ignore
 const GoogleMapComponent = ({lat, lng}) => {
     const zoom = 14;
     return (

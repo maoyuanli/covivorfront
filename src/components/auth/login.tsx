@@ -5,6 +5,7 @@ import {loginAction} from "../../redux/action/auth-action";
 import PropTypes from "prop-types";
 import {Divider, Form, Icon} from "semantic-ui-react";
 
+// @ts-ignore
 const Login = (props) => {
 
     const [formData, setFormData] = useState({
@@ -14,10 +15,12 @@ const Login = (props) => {
 
     const {email, pass} = formData;
 
+    // @ts-ignore
     const handleOnChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
     };
 
+    // @ts-ignore
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         props.loginAction(email, pass);
@@ -65,6 +68,7 @@ const mapActionToProps = {
     loginAction
 }
 
+// @ts-ignore
 const mapStateToProps = state => ({
     isAuthenticated: state.authReducer.isAuthenticated
 });

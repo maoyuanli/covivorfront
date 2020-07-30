@@ -5,7 +5,7 @@ import {createPostAction, getAllPostsAction} from "../../redux/action/post-actio
 import {Icon} from "semantic-ui-react";
 import PostItem from "./post-item";
 import Pagination from "../../utils/pagination";
-
+// @ts-ignore
 const AllPosts = ({auth, post, getAllPostsAction, createPostAction}) => {
     useEffect(() => {
         getAllPostsAction();
@@ -13,13 +13,13 @@ const AllPosts = ({auth, post, getAllPostsAction, createPostAction}) => {
 
     const [creatPostText, setCreatePostText] = useState({newPostText: ''});
     const {newPostText} = creatPostText;
-
+// @ts-ignore
     const handleTextOnChange = (e) => {
         setCreatePostText(
             {...creatPostText, [e.target.name]: e.target.value}
         )
     };
-
+// @ts-ignore
     const handleCreatePost = (e) => {
         e.preventDefault();
         createPostAction(newPostText);
@@ -31,7 +31,7 @@ const AllPosts = ({auth, post, getAllPostsAction, createPostAction}) => {
 
     const indexOfLastItemOnPage = currentPage * itemsPerPage;
     const indexOfFirstItemOnPage = indexOfLastItemOnPage - itemsPerPage;
-
+// @ts-ignore
     const paginate = (page) => {
         setCurrentPage(page)
     };
@@ -79,9 +79,12 @@ const AllPosts = ({auth, post, getAllPostsAction, createPostAction}) => {
                     }
 
                     <div>
-                        {post.posts.slice(indexOfFirstItemOnPage,indexOfLastItemOnPage).map(p => (
-                            <PostItem key={p._id} postPassed={p}/>
-                        ))}
+                        {post.posts.slice(indexOfFirstItemOnPage, indexOfLastItemOnPage)
+                            // @ts-ignore
+                            .map(p => (
+                                // @ts-ignore
+                                <PostItem key={p._id} postPassed={p}/>
+                            ))}
                     </div>
                 </Fragment>
             }
@@ -97,7 +100,7 @@ AllPosts.propTypes = {
     getAllPostsAction: PropTypes.func.isRequired,
     createPostAction: PropTypes.func.isRequired
 };
-
+// @ts-ignore
 const mapStateToProps = (state) => ({
     post: state.postReducer,
     auth: state.authReducer

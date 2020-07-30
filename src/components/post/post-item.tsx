@@ -6,7 +6,7 @@ import {deletePostAction, getAllPostsAction, likePostAction, unLikePostAction} f
 import {Link} from "react-router-dom";
 import {getAllProfilesAction} from "../../redux/action/profile-action";
 
-const PostItem = ({
+const PostItem = ({// @ts-ignore
                       auth, profile, postPassed, getAllPostsAction, likePostAction, unLikePostAction, getAllProfilesAction, deletePostAction,
                   }) => {
     useEffect(() => {
@@ -16,16 +16,18 @@ const PostItem = ({
     const curPost = postPassed;
     const curPostId = postPassed._id;
     const curUserId = auth.user ? auth.user._id : 0
+    // @ts-ignore
     const postUserProfile = profile.profiles.filter(p => p.user._id === curPost.user._id)[0];
 
     const handleLikePost = () => {
+        // @ts-ignore
         if (!curPost.likes.map(like => like.user).includes(curUserId)) {
             likePostAction(curPostId);
         } else {
             unLikePostAction(curPostId);
         }
     };
-
+// @ts-ignore
     const handleDeletePost = (e) => {
         e.preventDefault();
         deletePostAction(curPostId);
@@ -46,7 +48,9 @@ const PostItem = ({
                         {curPost.date}
                     </p>
                     <Button as='div' labelPosition='right'>
-                        <Button basic={!curPost.likes.map(like => like.user).includes(curUserId)} color='red'
+                        <Button basic={!curPost.likes
+                            // @ts-ignore
+                            .map(like => like.user).includes(curUserId)} color='red'
                                 onClick={handleLikePost}>
                             <Icon name='heart'/>
                             Like
@@ -87,7 +91,7 @@ PostItem.propTypes = {
     getAllProfilesAction: PropTypes.func.isRequired,
     deletePostAction: PropTypes.func.isRequired,
 };
-
+// @ts-ignore
 const mapStateToProps = (state) => ({
     auth: state.authReducer,
     profile: state.profileReducer

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {logoutAction} from "../redux/action/auth-action";
 import {Icon} from "semantic-ui-react";
 
-
+// @ts-ignore
 const Navbar = (props) => {
     const authLinks = (
         <Fragment>
@@ -51,7 +51,7 @@ const Navbar = (props) => {
         </div>
     );
 };
-
+// @ts-ignore
 const mapStateToProps = (state) => {
     return {
         auth: state.authReducer

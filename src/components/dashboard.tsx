@@ -6,7 +6,7 @@ import {Button, Divider, Header, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {getAllPostsAction} from "../redux/action/post-action";
 import PostItem from "./post/post-item";
-
+// @ts-ignore
 const Dashboard = props => {
     const {profile, auth, post, getProfileAction, getAllPostsAction} = props
 
@@ -43,7 +43,9 @@ const Dashboard = props => {
                         </Divider>
                         {
                             post.posts
+                                // @ts-ignore
                                 .filter(post => post.user._id === auth.user._id)
+                                // @ts-ignore
                                 .map(post => (<PostItem key={post._id} postPassed={post}/>
                                 ))}
                     </div>)}
@@ -59,7 +61,7 @@ Dashboard.propTypes = {
     auth: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
 };
-
+// @ts-ignore
 const mapStateToProps = state => ({
     profile: state.profileReducer,
     auth: state.authReducer,

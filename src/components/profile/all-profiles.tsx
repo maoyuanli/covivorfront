@@ -5,7 +5,7 @@ import {getAllProfilesAction} from "../../redux/action/profile-action";
 import {Header, ItemGroup, Message} from "semantic-ui-react";
 import ProfileItem from "./profile-item";
 import Pagination from "../../utils/pagination";
-
+// @ts-ignore
 const AllProfiles = ({getAllProfilesAction, profile}) => {
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
 
     const indexOfLastItemOnPage = currentPage * itemsPerPage;
     const indexOfFirstItemOnPage = indexOfLastItemOnPage - itemsPerPage;
-
+// @ts-ignore
     const paginate = (page) => {
         setCurrentPage(page)
     };
@@ -45,10 +45,12 @@ const AllProfiles = ({getAllProfilesAction, profile}) => {
                     <ItemGroup>
                         {profile.profiles.length > 0 ?
                             (
-                                profile.profiles.slice(indexOfFirstItemOnPage, indexOfLastItemOnPage).map(p => {
-                                        return <ProfileItem key={p._id} profile={p}/>
-                                    }
-                                )
+                                profile.profiles.slice(indexOfFirstItemOnPage, indexOfLastItemOnPage)
+                                    // @ts-ignore
+                                    .map(p => {
+                                            return <ProfileItem key={p._id} profile={p}/>
+                                        }
+                                    )
                             ) :
                             <h3>No Profiles Found</h3>}
                     </ItemGroup>
@@ -64,7 +66,7 @@ AllProfiles.propTypes = {
     getAllProfilesAction: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired
 };
-
+// @ts-ignore
 const mapStateToProps = (state) => ({
     profile: state.profileReducer
 });

@@ -12,7 +12,7 @@ import {removeAlert, setAlert} from "./alert-action";
 import setAuthToken from "../../utils/set-auth-token";
 import {setRequestConfig} from "../../utils/set-request-config";
 import {config} from "../../utils/config";
-
+// @ts-ignore
 export const registerAction = ({name, email, password}) => async dispatch => {
     try {
         const newUser = {
@@ -31,6 +31,7 @@ export const registerAction = ({name, email, password}) => async dispatch => {
         const errors = err.response.data.errors;
 
         if (errors) {
+            // @ts-ignore
             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
         }
 
@@ -39,7 +40,7 @@ export const registerAction = ({name, email, password}) => async dispatch => {
         });
     }
 };
-
+// @ts-ignore
 export const loadUserAction = () => async dispatch => {
     if (localStorage.token) {
         setAuthToken(localStorage.token)
@@ -57,7 +58,7 @@ export const loadUserAction = () => async dispatch => {
         })
     }
 };
-
+// @ts-ignore
 export const loginAction = (email, password) => async dispatch => {
     try {
         const user = {
@@ -79,7 +80,7 @@ export const loginAction = (email, password) => async dispatch => {
         setTimeout(() => dispatch(removeAlert('danger')), 5000)
     }
 };
-
+// @ts-ignore
 export const logoutAction = () => dispatch => {
     dispatch({
         type: LOGOUT

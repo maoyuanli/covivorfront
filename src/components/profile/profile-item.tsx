@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 
 const ProfileItem = ({
                          profile: {
+                             // @ts-ignore
                              user: {fullname}, facebook, instagram, linkedin, location, twitter, youtube, bio, _id, photoUrl
                          }
                      }) => {

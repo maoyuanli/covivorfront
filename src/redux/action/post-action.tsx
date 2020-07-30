@@ -3,7 +3,7 @@ import {GET_ALL_POSTS, UPDATE_COMMENTS, UPDATE_LIKES} from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
 import {setRequestConfig} from "../../utils/set-request-config";
 import {config} from "../../utils/config";
-
+// @ts-ignore
 export const getAllPostsAction = () => async dispatch => {
     try {
         const res = await axios.get(config.URL_PREFIX + 'post/getall');
@@ -16,7 +16,7 @@ export const getAllPostsAction = () => async dispatch => {
         setTimeout(() => dispatch(removeAlert('danger')), 5000)
     }
 };
-
+// @ts-ignore
 export const likePostAction = (postId) => async dispatch => {
     try {
         const body = JSON.stringify({postId: postId});
@@ -29,7 +29,7 @@ export const likePostAction = (postId) => async dispatch => {
         console.log(e)
     }
 };
-
+// @ts-ignore
 export const unLikePostAction = (postId) => async dispatch => {
     try {
         const body = JSON.stringify({postId: postId});
@@ -42,7 +42,7 @@ export const unLikePostAction = (postId) => async dispatch => {
         console.log(e)
     }
 };
-
+// @ts-ignore
 export const createPostAction = (postText) => async dispatch => {
     try {
         const body = JSON.stringify({
@@ -59,7 +59,7 @@ export const createPostAction = (postText) => async dispatch => {
         console.log(e)
     }
 };
-
+// @ts-ignore
 export const deletePostAction = (postId) => async dispatch => {
     try {
         const res = await axios.delete(config.URL_PREFIX + `post/delete/${postId}`, setRequestConfig())
@@ -71,7 +71,7 @@ export const deletePostAction = (postId) => async dispatch => {
         console.log(e)
     }
 };
-
+// @ts-ignore
 export const commentPostAction = (postId, text) => async dispatch => {
     try {
         const body = JSON.stringify({postId, text});
@@ -84,7 +84,7 @@ export const commentPostAction = (postId, text) => async dispatch => {
         console.log(e)
     }
 };
-
+// @ts-ignore
 export const unCommentPostAction = (postId, commentId) => async dispatch => {
     try {
         const body = JSON.stringify({postId, commentId});

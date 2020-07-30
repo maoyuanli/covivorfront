@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import {Button, Icon, Item, ItemGroup} from "semantic-ui-react";
 import PropTypes from 'prop-types';
-
+// @ts-ignore
 const Post = ({post, auth, profile, getAllPostsAction, commentPostAction, unCommentPostAction, location, history}) => {
     useEffect(() => {
         getAllPostsAction()
@@ -17,20 +17,20 @@ const Post = ({post, auth, profile, getAllPostsAction, commentPostAction, unComm
 
     const [commentText, setCommentTest] = useState({newCommentText: ''});
     const {newCommentText} = commentText;
-
+// @ts-ignore
     const handleTextOnChange = (e) => {
         setCommentTest(
             {...commentText, [e.target.name]: e.target.value}
         )
     };
-
+// @ts-ignore
     const handleCreateComment = (e) => {
         e.preventDefault();
         commentPostAction(propsPassed.id, newCommentText);
         setCommentTest({newCommentText: ''})
     }
 
-
+// @ts-ignore
     const handleDeleteComment = (e, commentId) => {
         e.preventDefault();
         unCommentPostAction(propsPassed.id, commentId)
@@ -39,7 +39,9 @@ const Post = ({post, auth, profile, getAllPostsAction, commentPostAction, unComm
     if (!propsPassed) {
         history.push('/allposts')
     }
+    // @ts-ignore
     const curPost = post.posts.filter(p => p._id === propsPassed.id)[0]
+    // @ts-ignore
     const curPostUserProfile = profile.profiles.filter(p => p.user._id === curPost.user._id)[0];
 
     return (
@@ -87,30 +89,33 @@ const Post = ({post, auth, profile, getAllPostsAction, commentPostAction, unComm
             </div>
 
             <div className="comments">
-                {curPost.comments.map(c => {
-                        const commentUserProfile = profile.profiles.filter(p => p.user._id === c.user)[0];
-                        return (
-                            <div key={c._id} className="post bg-white p-1 my-1">
-                                <ItemGroup>
-                                    {!profile.loading && (<Item.Image src={commentUserProfile.photoUrl}/>)}
-                                    <Item.Header>{c.fullname}</Item.Header>
-                                </ItemGroup>
-                                <div>
-                                    <p className="ui info message" style={{fontSize: 'large'}}>
-                                        {c.text}
-                                    </p>
-                                    <p className="post-date">
-                                        {c.date}
-                                    </p>
-                                    {curUserId === c.user &&
-                                    (<Button onClick={(event) => handleDeleteComment(event, c._id)}
-                                             color='brown'>Delete</Button>)}
-                                </div>
+                {curPost.comments
+                    // @ts-ignore
+                    .map(c => {
+                            // @ts-ignore
+                            const commentUserProfile = profile.profiles.filter(p => p.user._id === c.user)[0];
+                            return (
+                                <div key={c._id} className="post bg-white p-1 my-1">
+                                    <ItemGroup>
+                                        {!profile.loading && (<Item.Image src={commentUserProfile.photoUrl}/>)}
+                                        <Item.Header>{c.fullname}</Item.Header>
+                                    </ItemGroup>
+                                    <div>
+                                        <p className="ui info message" style={{fontSize: 'large'}}>
+                                            {c.text}
+                                        </p>
+                                        <p className="post-date">
+                                            {c.date}
+                                        </p>
+                                        {curUserId === c.user &&
+                                        (<Button onClick={(event) => handleDeleteComment(event, c._id)}
+                                                 color='brown'>Delete</Button>)}
+                                    </div>
 
-                            </div>
-                        )
-                    }
-                )}
+                                </div>
+                            )
+                        }
+                    )}
             </div>
         </Fragment>
     );
@@ -126,7 +131,7 @@ Post.propTypes = {
     commentPostAction: PropTypes.func.isRequired,
     unCommentPostAction: PropTypes.func.isRequired,
 };
-
+// @ts-ignore
 const mapStateToProps = state => ({
     post: state.postReducer,
     auth: state.authReducer,
@@ -139,4 +144,5 @@ const mapActionToProps = {
     unCommentPostAction,
 }
 
+// @ts-ignore
 export default connect(mapStateToProps, mapActionToProps)(withRouter(Post));

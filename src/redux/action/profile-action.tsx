@@ -3,7 +3,7 @@ import {GET_ALL_PROFILES, GET_PROFILE} from "./action-constants";
 import {removeAlert, setAlert} from "./alert-action";
 import {setRequestConfig} from "../../utils/set-request-config";
 import {config} from "../../utils/config";
-
+// @ts-ignore
 export const getProfileAction = () => async dispatch => {
     try {
         const res = await axios.get(config.URL_PREFIX + 'profile/get');
@@ -15,7 +15,7 @@ export const getProfileAction = () => async dispatch => {
         console.log(e);
     }
 };
-
+// @ts-ignore
 export const getAllProfilesAction = () => async dispatch => {
     try {
         const res = await axios.get(config.URL_PREFIX + 'profile/getall');
@@ -27,7 +27,7 @@ export const getAllProfilesAction = () => async dispatch => {
         console.log(e);
     }
 };
-
+// @ts-ignore
 export const upsertProfileAction = (formData, history) => async dispatch => {
     try {
         const body = JSON.stringify({profile: formData});

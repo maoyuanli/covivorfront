@@ -1,6 +1,6 @@
 import {REMOVE_ALERT, SET_ALERT} from "./action-constants";
 import cuid from 'cuid';
-
+// @ts-ignore
 export const setAlert = (msg, alertType) => {
     const id = cuid();
     return {
@@ -8,7 +8,7 @@ export const setAlert = (msg, alertType) => {
         payload: {msg, alertType, id}
     }
 };
-
+// @ts-ignore
 export const removeAlert = (alertType) => {
     return {
         type: REMOVE_ALERT,

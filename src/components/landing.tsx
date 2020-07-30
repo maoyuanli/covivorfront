@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {Container, Form, Header, Image, Segment} from "semantic-ui-react";
 import {loginAction} from "../redux/action/auth-action";
-
+// @ts-ignore
 const Landing = (props) => {
     const [formData, setFormData] = useState({
         email: 'guest@account.com',
@@ -16,11 +16,11 @@ const Landing = (props) => {
         return (<Redirect to='/allposts'/>);
     }
 
-
+// @ts-ignore
     const handleOnChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
     };
-
+// @ts-ignore
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         props.loginAction(email, pass);
@@ -72,7 +72,7 @@ const Landing = (props) => {
 Landing.propTypes = {
     isAuthenticated: PropTypes.bool,
 }
-
+// @ts-ignore
 const mapStateToProps = state => ({
     isAuthenticated: state.authReducer.isAuthenticated
 })

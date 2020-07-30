@@ -6,7 +6,7 @@ import {Link, withRouter} from "react-router-dom";
 import {Button, Divider, Form, Grid, Header, Icon, Image, Message} from "semantic-ui-react";
 import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 import GoogleMapComponent from "./google-map-component";
-
+// @ts-ignore
 const Profile = ({history, location, getProfileAction, profile, auth}) => {
 
     useEffect(() => {
@@ -20,6 +20,7 @@ const Profile = ({history, location, getProfileAction, profile, auth}) => {
     if (!propsPassed) {
         history.push('/allprofiles')
     }
+    // @ts-ignore
     const profilePassed = profile.profiles.filter(p => p._id === location.profileProps.id)[0];
     curProfile = profilePassed;
     if (auth.user) {
@@ -102,7 +103,7 @@ Profile.propTypes = {
     history: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
 };
-
+// @ts-ignore
 const mapStateToProps = (state) => ({
     profile: state.profileReducer,
     auth: state.authReducer
@@ -111,5 +112,5 @@ const mapStateToProps = (state) => ({
 const mapActionToProps = {
     getProfileAction
 }
-
+// @ts-ignore
 export default connect(mapStateToProps, mapActionToProps)(withRouter(Profile));

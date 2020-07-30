@@ -6,7 +6,7 @@ const initState = {
     loading: true,
     error: {}
 }
-
+// @ts-ignore
 const profileReducer = (state = initState, action) => {
     const {type, payload} = action;
     switch (type) {

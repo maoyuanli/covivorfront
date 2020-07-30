@@ -14,7 +14,7 @@ const initState = {
     loading: true,
     user: null
 }
-
+// @ts-ignore
 const authReducer = (state = initState, action) => {
     const {type, payload} = action
     switch (type) {

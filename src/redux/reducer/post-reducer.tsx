@@ -6,7 +6,7 @@ const initState = {
     loading: true,
     error: {}
 }
-
+// @ts-ignore
 const postReducer = (state = initState, action) => {
     const {type, payload} = action;
     switch (type) {
@@ -15,14 +15,18 @@ const postReducer = (state = initState, action) => {
         case UPDATE_LIKES:
             return {
                 ...state,
+                // @ts-ignore
                 posts: state.posts.map(p => p._id === payload.postId ?
+                    // @ts-ignore
                     {...p, likes: payload.likes} : p),
                 loading: false
             };
         case UPDATE_COMMENTS:
             return {
                 ...state,
+                // @ts-ignore
                 posts: state.posts.map(p => p._id === payload.postId ?
+                    // @ts-ignore
                     {...p, comments: payload.comments} : p),
                 loading: false
             };
