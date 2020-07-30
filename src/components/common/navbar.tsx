@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
-import {logoutAction} from "../redux/action/auth-action";
+import {logoutAction} from "../../redux/action/auth-action";
 import {Icon} from "semantic-ui-react";
 
 // @ts-ignore
