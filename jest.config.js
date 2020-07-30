@@ -7,6 +7,7 @@ module.exports = {
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     setupFilesAfterEnv: [
         "@testing-library/react/cleanup-after-each",
-        "@testing-library/jest-dom/extend-expect"
+        "@testing-library/jest-dom/extend-expect",
+        "<rootDir>src/setupTests.js"
     ],
 }

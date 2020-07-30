@@ -1,7 +1,11 @@
 import React from 'react';
+import {mount} from "enzyme";
+import App from "./App";
+import Landing from "./components/landing";
 
 describe('test App', () => {
     it('should render landing page', () => {
-        expect(1).toEqual(1)
+        const wrapped = mount(<App/>);
+        expect(wrapped.find(Landing).length).toEqual(1);
     })
 });
