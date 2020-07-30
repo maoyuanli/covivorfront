@@ -36,7 +36,6 @@ export const App = () => {
                         <Navbar/>
                         <Route exact path='/' component={Landing}/>
                         <section className='container'>
-                            //@ts-ignore
                             <Alert/>
                             <Switch>
                                 <Route exact path='/register' component={Register}/>
