@@ -20,7 +20,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/semantic-ui": "^2.2.7",
     "@types/styled-components": "^5.1.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "cuid": "^2.1.8",
     "google-map-react": "^1.1.4",
